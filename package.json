@@ -1,0 +1,20 @@
+{
+  "name": "flashiro",
+  "version": "0.0.0",
+  "description": "Personalized news reader for quick catch up every morning.",
+  "author": "James Pietras <james.m.pietras@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://github.com/jamespietras/flashiro#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamespietras/flashiro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jamespietras/flashiro/issues"
+  },
+  "engines": {
+    "node": "6.10.0",
+    "npm": "3.10.10"
+  }
+}
