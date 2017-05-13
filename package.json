@@ -6,6 +6,29 @@
   "license": "UNLICENSED",
   "private": true,
   "homepage": "https://github.com/jamespietras/flashiro#readme",
+  "keywords": [
+    "news",
+    "utility"
+  ],
+  "contributors": [
+    {
+      "name": "James Pietras",
+      "email": "james.m.pietras@gmail.com"
+    }
+  ],
+  "scripts": {
+    "check": "npm run check-log && npm run check-action && echo ''",
+    "check-action": "nsp check --output checkstyle || true",
+    "check-log": "npm run prefix && echo 'Checking dependencies...'",
+    "compress": "npm run compress-log && npm run compress-action",
+    "compress-action": "git gc || true",
+    "compress-log": "npm run prefix && echo 'Compressing git repository...'",
+    "prefix": "echo '\n\\033[1;97;104m[flashiro]\\033[0m \\c'",
+    "preinstall": "npm run compress",
+    "postinstall": "npm run resolve-confirmation && npm run check",
+    "resolve-confirmation": "npm run prefix && echo 'Dependencies resolved.'",
+    "start": "react-scripts start"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jamespietras/flashiro.git"
@@ -16,5 +39,19 @@
   "engines": {
     "node": "6.10.0",
     "npm": "3.10.10"
+  },
+  "devDependencies": {
+    "nsp": "^2.6.3",
+    "react-scripts": "^0.9.5"
+  },
+  "dependencies": {
+    "history": "^4.6.1",
+    "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.6.0"
   }
 }
