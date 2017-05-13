@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="app__wrapper">
+      <div className="app">
         <Grid>
           {this.props.children}
         </Grid>

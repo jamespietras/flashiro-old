@@ -4,23 +4,36 @@ import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
 import Clock from './applets/Clock';
+import Spinner from '../Spinner';
+import Weather from './applets/Weather';
 import {loadCnnHeadlines} from '../../actions/headlines';
+import {loadWeatherForecast} from '../../actions/weather';
 
 import './Dashboard.css';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.loadCnnHeadlines();
+    this.props.loadWeatherForecast();
   }
 
   render() {
     return (
-      <div>
-        <br />
-        <Clock className="dashboard__tile" />
+      <div className="dashboard">
+        <div className="dashboard__tile">
+          <Clock />
+        </div>
+
+        <div className="dashboard__tile">
+          <Weather
+            city={this.props.weatherCity}
+            forecast={this.props.weatherForecast}
+            loading={this.props.weatherLoading}
+          />
+        </div>
 
         {this.props.loadingCnnHeadlines ?
-            <p>Loading...</p>
+            <Spinner />
           :
             <ListGroup>
               {_.map(this.props.cnnHeadlines, (headline, index) => (
@@ -38,12 +51,16 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     cnnHeadlines: state.headlines.cnn,
-    loadingCnnHeadlines: state.headlines.loadingCnn
+    loadingCnnHeadlines: state.headlines.loadingCnn,
+    weatherCity: state.weather.city,
+    weatherForecast: state.weather.forecast,
+    weatherLoading: state.weather.forecastLoading
   };
 }
 
 const actions = {
-  loadCnnHeadlines
+  loadCnnHeadlines,
+  loadWeatherForecast
 };
 
 export default connect(mapStateToProps, actions)(Dashboard);

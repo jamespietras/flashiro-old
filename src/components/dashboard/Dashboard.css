@@ -1,3 +1,7 @@
+.dashboard {
+  padding-top: 20px;
+}
+
 .dashboard__tile {
   background-color: #fafbfb;
   border-radius: 3px;

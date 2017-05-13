@@ -1,4 +1,7 @@
-import {LOAD_CNN_HEADLINES, LOADING_CNN_HEADLINES} from '../actions/headlines';
+import {
+  LOADED_CNN_HEADLINES,
+  LOADING_CNN_HEADLINES
+} from '../actions/headlines';
 
 const initialState = {
   cnn: [],
@@ -7,7 +10,7 @@ const initialState = {
 
 function headlines(state = initialState, action) {
   switch(action.type) {
-    case LOAD_CNN_HEADLINES:
+    case LOADED_CNN_HEADLINES:
       return {
         ...state,
         cnn: action.payload,
