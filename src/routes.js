@@ -4,13 +4,16 @@ import {Route, Router} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 
 import App from './App';
+import Dashboard from './components/Dashboard';
 
 function routes(store) {
   const history = syncHistoryWithStore(createHistory(), store);
 
   return(
     <Router history={history}>
-      <Route path="/" component={App} />
+      <App>
+        <Route exact path="/" component={Dashboard} />
+      </App>
     </Router>
   );
 }
