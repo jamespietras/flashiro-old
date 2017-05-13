@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import Clock from './Clock';
-import {loadCnnHeadlines} from '../actions/headlines';
+import Clock from './applets/Clock';
+import {loadCnnHeadlines} from '../../actions/headlines';
 
-import './dashboard.css';
+import './Dashboard.css';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -16,19 +16,15 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center">Welcome!</h1>
-        <hr />
+        <br />
+        <Clock className="dashboard__tile" />
 
-        <Clock />
-
-        <hr />
-        <h3>CNN top headlines:</h3>
         {this.props.loadingCnnHeadlines ?
             <p>Loading...</p>
           :
             <ListGroup>
               {_.map(this.props.cnnHeadlines, (headline, index) => (
-                <ListGroupItem key={index}href={headline.url}>
+                <ListGroupItem key={index} href={headline.url}>
                   <h4>{headline.title}</h4>
                 </ListGroupItem>
               ))}

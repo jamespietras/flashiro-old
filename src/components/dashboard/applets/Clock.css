@@ -1,0 +1,21 @@
+.clock {
+  align-items: center;
+  display: flex;
+}
+
+.clock__date {
+  font-size: 14px;
+}
+
+.clock__icon {
+  color: #3498db;
+  font-size: 46px;
+}
+
+.clock__info {
+  margin-left: 12px;
+}
+
+.clock__time {
+  font-size: 18px;
+}
