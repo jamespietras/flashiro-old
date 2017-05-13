@@ -1,9 +1,12 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {Button, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
+import Clock from './Clock';
 import {loadCnnHeadlines} from '../actions/headlines';
+
+import './dashboard.css';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -14,14 +17,11 @@ class Dashboard extends Component {
     return (
       <div>
         <h1 className="text-center">Welcome!</h1>
-
         <hr />
 
-        <p>It's a perfect time to catch up with current world events!</p>
-        <Button bsStyle="primary">Let's start!</Button>
+        <Clock />
 
         <hr />
-
         <h3>CNN top headlines:</h3>
         {this.props.loadingCnnHeadlines ?
             <p>Loading...</p>
