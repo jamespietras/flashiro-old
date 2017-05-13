@@ -1,5 +1,6 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, ListGroup, ListGroupItem} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
 import {loadCnnHeadlines} from '../actions/headlines';
@@ -7,10 +8,6 @@ import {loadCnnHeadlines} from '../actions/headlines';
 class Dashboard extends Component {
   componentDidMount() {
     this.props.loadCnnHeadlines();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.cnnHeadlines !== nextProps.cnnHeadlines;
   }
 
   render() {
@@ -26,6 +23,17 @@ class Dashboard extends Component {
         <hr />
 
         <h3>CNN top headlines:</h3>
+        {this.props.loadingCnnHeadlines ?
+            <p>Loading...</p>
+          :
+            <ListGroup>
+              {_.map(this.props.cnnHeadlines, (headline, index) => (
+                <ListGroupItem key={index}href={headline.url}>
+                  <h4>{headline.title}</h4>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+        }
       </div>
     );
   }
