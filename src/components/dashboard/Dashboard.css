@@ -1,0 +1,15 @@
+.dashboard {
+  padding-top: 20px;
+}
+
+.dashboard__tile {
+  background-color: #fafbfb;
+  border-radius: 3px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, .75);
+  margin-bottom: 16px;
+  padding: 14px 12px;
+}
+
+.dashboard__tile--unpadded {
+  padding: 0;
+}

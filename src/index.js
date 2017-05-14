@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {applyMiddleware, createStore} from 'redux';
+import {createLogger} from 'redux-logger';
 import {Provider} from 'react-redux';
 
 import rootReducer from './reducers';
 import routes from './routes';
 
-const store = createStore(rootReducer);
+const loggerMiddleware = createLogger({
+  collapsed: true,
+  diff: true,
+  duration: true
+});
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    loggerMiddleware,
+    thunkMiddleware
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>

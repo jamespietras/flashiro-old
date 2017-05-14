@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 
-import placeholders from './placeholders';
+import headlines from './headlines';
+import weather from './weather';
 
 const rootReducer = combineReducers({
-  placeholders,
-  routing: routerReducer
+  headlines,
+  routing: routerReducer,
+  weather
 });
 
 export default rootReducer;
