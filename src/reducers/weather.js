@@ -22,11 +22,9 @@ function headlines(state = initialState, action) {
         forecastError: action.payload
       };
     case LOADED_WEATHER_FORECAST:
-      let todayForecast = _.filter(action.payload.list, (entry) => {
-        return moment().isSame(moment(entry.dt_txt), 'day');
-      });
+      let forecast = _.take(action.payload.list, 7);
 
-      todayForecast = _.map(todayForecast, (entry) => {
+      forecast = _.map(forecast, (entry) => {
         return {
           description: _.first(entry.weather).description,
           icon: _.first(entry.weather).main.toLowerCase(),
@@ -38,7 +36,7 @@ function headlines(state = initialState, action) {
       return {
         ...state,
         city: action.payload.city.name,
-        forecast: todayForecast,
+        forecast: forecast,
         loadingForecast: false
       };
     case LOADING_WEATHER_FORECAST:

@@ -25,6 +25,11 @@ export function loadWeatherForecast() {
           type: LOADED_WEATHER_FORECAST,
           payload: _.pick(response.data, ['city', 'list'])
         });
+      }).catch((error) => {
+        dispatch({
+          type: ERROR_WEATHER_FORECAST,
+          payload: error.message
+        });
       });
     }, (error) => {
       dispatch({
