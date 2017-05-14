@@ -21,8 +21,10 @@ function headlines(state = initialState, action) {
 
       todayForecast = _.map(todayForecast, (entry) => {
         return {
-          description: _.first(entry.weather).main,
-          temp: entry.main.temp
+          description: _.first(entry.weather).description,
+          icon: _.first(entry.weather).main.toLowerCase(),
+          temperature: Math.round(entry.main.temp - 273.15),
+          time: moment(entry.dt_txt)
         };
       });
 

@@ -20,7 +20,7 @@ class Clock extends Component {
 
         <div className="clock__info">
           <div className="clock__time">{moment().format('h:mma')}</div>
-          <div className="clock__date">{moment().format('dddd, MMMM do')}</div>
+          <div className="clock__date">{moment().format('dddd, MMMM Do')}</div>
         </div>
       </div>
     );
