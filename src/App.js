@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Grid} from 'react-bootstrap';
+import {Col, Grid, Row} from 'react-bootstrap';
 
 import './App.css';
 
@@ -8,7 +8,11 @@ class App extends Component {
     return (
       <div className="app">
         <Grid>
-          {this.props.children}
+          <Row>
+            <Col sm={6} smOffset={3} lg={4} lgOffset={4}>
+              {this.props.children}
+            </Col>
+          </Row>
         </Grid>
       </div>
     );

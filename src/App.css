@@ -1,11 +1,14 @@
 body,
-html,
 #root {
   height: 100%;
 }
 
 body {
   font-family: 'Lato', sans-serif;
+}
+
+html {
+  min-height: 100%;
 }
 
 .app {

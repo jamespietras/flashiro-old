@@ -1,23 +1,36 @@
 import _ from 'lodash';
+import classnames from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
+import ErrorMessage from '../../ErrorMessage';
 import Spinner from '../../Spinner';
 
 import './Weather.css';
 
 class Weather extends Component {
-  static PropTypes = {
-    city: PropTypes.string.isRequired,
+  static propTypes = {
+    city: PropTypes.string,
+    error: PropTypes.shape(),
     forecast: PropTypes.arrayOf(PropTypes.shape({
       icon: PropTypes.string.isRequired,
       temperature: PropTypes.number.isRequired,
       time: PropTypes.instanceOf(moment)
-    })).isRequired,
+    })),
     loading: PropTypes.bool.isRequired
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      expanded: false
+    };
+
+    this.toggleExpansion = this.toggleExpansion.bind(this);
+  }
 
   getIconFor(iconName) {
     switch(iconName) {
@@ -40,9 +53,27 @@ class Weather extends Component {
     }
   }
 
+  toggleExpansion() {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  }
+
   render() {
+    if(this.props.error) {
+      return (
+        <div className="weather--not-loaded">
+          <ErrorMessage message={this.props.error} />
+        </div>
+      );
+    }
+
     if(this.props.loading || _.isEmpty(this.props.forecast)) {
-      return (<Spinner />);
+      return (
+        <div className="weather--not-loaded">
+          <Spinner />
+        </div>
+      );
     }
 
     const closestEntry = _.minBy(this.props.forecast, (entry) => {
@@ -52,7 +83,9 @@ class Weather extends Component {
     return (
       <div>
         <div className="weather__current">
-          <span className="weather__current-icon">{this.getIconFor(closestEntry.icon)}</span>
+          <span className="weather__current-icon">
+            {this.getIconFor(closestEntry.icon)}
+          </span>
 
           <div>
             <div className="weather__current-temperature">
@@ -76,10 +109,14 @@ class Weather extends Component {
           {_.min(_.map(this.props.forecast, 'temperature'))}&deg;
         </div>
 
-        <ul className="weather__forecast list-unstyled">
+        <ul className={classnames(
+          'weather__forecast',
+          this.state.expanded && 'weather__forecast--expanded',
+          'list-unstyled'
+        )}>
           {_.map(this.props.forecast, (entry, index) => (
             <li key={index} className="clearfix">
-              <span className="pull-left">{entry.time.format('ha')}</span>
+              <span className="pull-left">{entry.time.format('HH:mm')}</span>
               <span className="weather__forecast-icon">
                 {this.getIconFor(entry.icon)}
               </span>
@@ -87,6 +124,13 @@ class Weather extends Component {
             </li>
           ))}
         </ul>
+
+        <div className="weather__expander" onClick={this.toggleExpansion}>
+          <FontAwesome
+            className="weather__expander-icon"
+            name={this.state.expanded ? 'angle-double-up' : 'angle-double-down'}
+          />
+        </div>
       </div>
     );
   }

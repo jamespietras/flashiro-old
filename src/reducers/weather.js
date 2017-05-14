@@ -2,6 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import {
+  ERROR_WEATHER_FORECAST,
   LOADED_WEATHER_FORECAST,
   LOADING_WEATHER_FORECAST
 } from '../actions/weather';
@@ -9,11 +10,17 @@ import {
 const initialState = {
   city: null,
   forecast: [],
+  forecastError: null,
   loadingForecast: false
 };
 
 function headlines(state = initialState, action) {
   switch(action.type) {
+    case ERROR_WEATHER_FORECAST:
+      return {
+        ...state,
+        forecastError: action.payload
+      };
     case LOADED_WEATHER_FORECAST:
       let todayForecast = _.filter(action.payload.list, (entry) => {
         return moment().isSame(moment(entry.dt_txt), 'day');

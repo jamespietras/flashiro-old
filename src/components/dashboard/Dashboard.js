@@ -27,6 +27,7 @@ class Dashboard extends Component {
         <div className="dashboard__tile dashboard__tile--unpadded">
           <Weather
             city={this.props.weatherCity}
+            error={this.props.weatherError}
             forecast={this.props.weatherForecast}
             loading={this.props.weatherLoading}
           />
@@ -53,6 +54,7 @@ function mapStateToProps(state) {
     cnnHeadlines: state.headlines.cnn,
     loadingCnnHeadlines: state.headlines.loadingCnn,
     weatherCity: state.weather.city,
+    weatherError: state.weather.forecastError,
     weatherForecast: state.weather.forecast,
     weatherLoading: state.weather.loadingForecast
   };

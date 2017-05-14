@@ -1,3 +1,7 @@
+.weather--not-loaded {
+  padding: 18px 0;
+}
+
 .weather__current {
   align-items: center;
   display: flex;
@@ -19,11 +23,33 @@
   line-height: 1;
 }
 
+.weather__expander {
+  cursor: pointer;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.weather__expander-icon {
+  color: #3498db;
+  font-size: 21px;
+}
+
 .weather__forecast {
   border-top: 2px solid #dde4e6;
+  height: 2px;
+  margin: 0;
+  overflow: hidden;
+  transition: height 1s;
+  transition-timing-function: easeOutQuart;
+  transform: translate3d(0, 0, 0);
+}
+
+.weather__forecast--expanded {
+  height: 268px;
 }
 
 .weather__forecast li {
+  height: 38px;
   padding: 9px 11px;
   position: relative;
 }

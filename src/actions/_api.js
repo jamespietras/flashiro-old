@@ -26,11 +26,11 @@ class Api {
     });
   }
 
-  static queryWeather() {
+  static queryWeather(latitude, longitude) {
     return openweathermap.get('/forecast', {
       params: {
-        lat: '50.06465009999999',
-        lon: '19.94497990000002'
+        lat: latitude,
+        lon: longitude
       }
     });
   }
