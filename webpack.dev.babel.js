@@ -28,7 +28,7 @@ const config = {
   entry: [
     `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
     'webpack/hot/only-dev-server',
-    path.join(__dirname, './src/index.js'),
+    path.join(__dirname, './src/index.jsx'),
   ],
   output: {
     path: path.join(__dirname, 'build'),

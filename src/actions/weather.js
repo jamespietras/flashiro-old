@@ -10,31 +10,33 @@ export function loadWeatherForecast() {
   return (dispatch) => {
     dispatch({ type: LOADING_WEATHER_FORECAST });
 
-    if(!navigator.geolocation) {
-      return dispatch({
+    if (!navigator.geolocation) {
+      dispatch({
         type: ERROR_WEATHER_FORECAST,
-        payload: 'Geolocation not supported'
+        payload: 'Geolocation not supported',
       });
+
+      return;
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
-      const {coords} = position;
+      const { coords } = position;
 
       Api.queryWeather(coords.latitude, coords.longitude).then((response) => {
         dispatch({
           type: LOADED_WEATHER_FORECAST,
-          payload: _.pick(response.data, ['city', 'list'])
+          payload: _.pick(response.data, ['city', 'list']),
         });
       }).catch((error) => {
         dispatch({
           type: ERROR_WEATHER_FORECAST,
-          payload: error.message
+          payload: error.message,
         });
       });
     }, (error) => {
       dispatch({
         type: ERROR_WEATHER_FORECAST,
-        payload: error.message
+        payload: error.message,
       });
     });
   };

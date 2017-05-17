@@ -10,7 +10,7 @@ export function loadCnnHeadlines() {
     Api.queryCnn().then((response) => {
       dispatch({
         type: LOADED_CNN_HEADLINES,
-        payload: response.data.articles
+        payload: response.data.articles,
       });
     });
   };

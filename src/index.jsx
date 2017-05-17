@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunkMiddleware from 'redux-thunk';
-import {applyMiddleware, createStore} from 'redux';
-import {createLogger} from 'redux-logger';
-import {Provider} from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import { createLogger } from 'redux-logger';
+import { Provider } from 'react-redux';
 
 import rootReducer from './reducers';
 import routes from './routes';
@@ -11,20 +11,20 @@ import routes from './routes';
 const loggerMiddleware = createLogger({
   collapsed: true,
   diff: true,
-  duration: true
+  duration: true,
 });
 
 const store = createStore(
   rootReducer,
   applyMiddleware(
+    thunkMiddleware,
     loggerMiddleware,
-    thunkMiddleware
-  )
+  ),
 );
 
 ReactDOM.render(
   <Provider store={store}>
     {routes(store)}
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

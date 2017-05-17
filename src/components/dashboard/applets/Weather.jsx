@@ -3,64 +3,64 @@ import classnames from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import ErrorMessage from '../../ErrorMessage';
 import Spinner from '../../Spinner';
 
-import './Weather.css';
+import './Weather.scss';
+
+const propTypes = {
+  city: PropTypes.string,
+  error: PropTypes.string,
+  forecast: PropTypes.arrayOf(PropTypes.shape({
+    icon: PropTypes.string.isRequired,
+    temperature: PropTypes.number.isRequired,
+    time: PropTypes.instanceOf(moment),
+  })),
+  loading: PropTypes.bool.isRequired,
+};
+
+function getIconFor(iconName) {
+  switch (iconName) {
+    case 'clear':
+      return <FontAwesome name="moon-o" />;
+    case 'clouds':
+      return <FontAwesome name="cloud" />;
+    case 'drizzle':
+      return <FontAwesome name="cubes" />;
+    case 'extreme':
+      return <FontAwesome name="warning " />;
+    case 'rain':
+      return <FontAwesome name="tint" />;
+    case 'snow':
+      return <FontAwesome name="snowflake-o" />;
+    case 'thunderstorm':
+      return <FontAwesome name="bolt" />;
+    default:
+      return <FontAwesome name="question" />;
+  }
+}
 
 class Weather extends Component {
-  static propTypes = {
-    city: PropTypes.string,
-    error: PropTypes.shape(),
-    forecast: PropTypes.arrayOf(PropTypes.shape({
-      icon: PropTypes.string.isRequired,
-      temperature: PropTypes.number.isRequired,
-      time: PropTypes.instanceOf(moment)
-    })),
-    loading: PropTypes.bool.isRequired
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
-      expanded: false
+      expanded: false,
     };
 
     this.toggleExpansion = this.toggleExpansion.bind(this);
   }
 
-  getIconFor(iconName) {
-    switch(iconName) {
-      case 'clear':
-        return <FontAwesome name="moon-o" />;
-      case 'clouds':
-        return <FontAwesome name="cloud" />;
-      case 'drizzle':
-        return <FontAwesome name="cubes" />;
-      case 'extreme':
-        return <FontAwesome name="warning " />;
-      case 'rain':
-        return <FontAwesome name="tint" />;
-      case 'snow':
-        return <FontAwesome name="snowflake-o" />;
-      case 'thunderstorm':
-        return <FontAwesome name="bolt" />;
-      default:
-        return <FontAwesome name="question" />;
-    }
-  }
-
   toggleExpansion() {
     this.setState({
-      expanded: !this.state.expanded
+      expanded: !this.state.expanded,
     });
   }
 
   render() {
-    if(this.props.error) {
+    if (this.props.error) {
       return (
         <div className="weather--not-loaded">
           <ErrorMessage message={this.props.error} />
@@ -68,7 +68,7 @@ class Weather extends Component {
       );
     }
 
-    if(this.props.loading || _.isEmpty(this.props.forecast)) {
+    if (this.props.loading || _.isEmpty(this.props.forecast)) {
       return (
         <div className="weather--not-loaded">
           <Spinner />
@@ -76,15 +76,13 @@ class Weather extends Component {
       );
     }
 
-    const closestEntry = _.minBy(this.props.forecast, (entry) => {
-      return entry.time.diff();
-    });
+    const closestEntry = _.minBy(this.props.forecast, entry => entry.time.diff());
 
     return (
       <div>
         <div className="weather__current">
           <span className="weather__current-icon">
-            {this.getIconFor(closestEntry.icon)}
+            {getIconFor(closestEntry.icon)}
           </span>
 
           <div>
@@ -109,31 +107,35 @@ class Weather extends Component {
           {_.min(_.map(this.props.forecast, 'temperature'))}&deg;
         </div>
 
-        <ul className={classnames(
-          'weather__forecast',
-          this.state.expanded && 'weather__forecast--expanded',
-          'list-unstyled'
-        )}>
+        <ul
+          className={classnames(
+            'weather__forecast',
+            this.state.expanded && 'weather__forecast--expanded',
+            'list-unstyled',
+          )}
+        >
           {_.map(this.props.forecast, (entry, index) => (
             <li key={index} className="clearfix">
               <span className="pull-left">{entry.time.format('HH:mm')}</span>
               <span className="weather__forecast-icon">
-                {this.getIconFor(entry.icon)}
+                {getIconFor(entry.icon)}
               </span>
               <span className="pull-right">{entry.temperature}&deg;</span>
             </li>
           ))}
         </ul>
 
-        <div className="weather__expander" onClick={this.toggleExpansion}>
+        <button className="weather__expander" onClick={this.toggleExpansion}>
           <FontAwesome
             className="weather__expander-icon"
             name={this.state.expanded ? 'angle-double-up' : 'angle-double-down'}
           />
-        </div>
+        </button>
       </div>
     );
   }
 }
+
+Weather.propTypes = propTypes;
 
 export default Weather;
