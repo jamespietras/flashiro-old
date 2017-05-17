@@ -1,6 +1,9 @@
 ## PACKAGES
 node_modules
 
+## CONFIGURATION
+.env
+
 ## LOGS
 logs
 *.log
