@@ -1,4 +1,4 @@
-import Api from './_api';
+import Api from 'flashiro/api';
 
 export const LOADED_CNN_HEADLINES = 'headlines:loadedCnnHeadlines';
 export const LOADING_CNN_HEADLINES = 'headlines:loadingCnnHeadlines';
@@ -10,7 +10,7 @@ export function loadCnnHeadlines() {
     Api.queryCnn().then((response) => {
       dispatch({
         type: LOADED_CNN_HEADLINES,
-        payload: response.data.articles
+        payload: response.data.articles,
       });
     });
   };

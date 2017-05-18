@@ -1,15 +1,15 @@
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';
-import {Route, Router} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+import { Route, Router } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
-import App from './App';
-import Dashboard from './components/dashboard/Dashboard';
+import App from 'flashiro/app';
+import Dashboard from 'flashiro/dashboard';
 
 function routes(store) {
   const history = syncHistoryWithStore(createHistory(), store);
 
-  return(
+  return (
     <Router history={history}>
       <App>
         <Route exact path="/" component={Dashboard} />
