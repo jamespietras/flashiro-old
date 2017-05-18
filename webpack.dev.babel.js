@@ -27,7 +27,7 @@ const config = {
   devtool: 'sourcemaps',
   entry: [
     `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
-    'webpack/hot/only-dev-server',
+    'webpack/hot/dev-server',
     path.join(__dirname, './src/index.jsx'),
   ],
   output: {
@@ -36,8 +36,8 @@ const config = {
     filename: 'bundle.js',
   },
   resolve: {
-    modules: ['src', 'node_modules'],
     extensions: ['.js', '.jsx'],
+    modules: ['src', 'node_modules'],
   },
   module: {
     loaders: [
@@ -48,7 +48,8 @@ const config = {
           'react-hot-loader',
           {
             loader: 'babel-loader',
-            query: {
+            options: {
+              plugins: ['lodash'],
               presets: ['es2015', 'react', 'stage-1'],
             },
           },
@@ -73,6 +74,7 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
     new PluginAnalyzer({
       analyzerHost,
       analyzerPort,

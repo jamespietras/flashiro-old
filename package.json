@@ -20,7 +20,7 @@
     "check": "npm run check-log && npm run check-action && echo ''",
     "check-action": "nsp check --output checkstyle || true",
     "check-log": "npm run prefix && echo 'Checking dependencies...'",
-    "compress": "npm run compress-log && npm run compress-action",
+    "compress": "npm run compress-log && npm run compress-action && echo ''",
     "compress-action": "git gc || true",
     "compress-log": "npm run prefix && echo 'Compressing git repository...'",
     "dev": "npm run dev-log && npm run dev-action",
@@ -29,7 +29,7 @@
     "lint": "npm run lint-log && npm run lint-action && npm run lint-success",
     "lint-action": "eslint --ext .jsx,.js ./ || true",
     "lint-log": "npm run prefix && echo 'Linting project code...'",
-    "lint-success": "npm run prefix && echo 'Code is clean, keep up the good work!\n'",
+    "lint-success": "npm run prefix && echo 'Code linted.\n'",
     "prefix": "echo '\n\\033[1;97;104m[flashiro]\\033[0m \\c'",
     "preinstall": "npm run compress",
     "postinstall": "npm run resolve-confirmation && npm run check",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -64,13 +65,13 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "file-loader": "^0.11.1",
     "html-loader": "^0.4.5",
     "node-sass": "^4.5.2",
     "nsp": "^2.6.3",
     "react-hot-loader": "^1.3.1",
     "sass-loader": "^6.0.5",
-    "style-loader": "^0.17.0",
-    "webpack-dashboard": "^0.4.0"
+    "style-loader": "^0.17.0"
   },
   "dependencies": {
     "axios": "^0.16.1",

@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import _first from 'lodash/first';
+import _map from 'lodash/map';
+import _take from 'lodash/take';
 import moment from 'moment';
 
 import {
@@ -15,11 +17,11 @@ const initialState = {
 };
 
 function parseForecast(forecastList) {
-  let forecast = _.take(forecastList, 7);
+  let forecast = _take(forecastList, 7);
 
-  forecast = _.map(forecast, entry => ({
-    description: _.first(entry.weather).description,
-    icon: _.first(entry.weather).main.toLowerCase(),
+  forecast = _map(forecast, entry => ({
+    description: _first(entry.weather).description,
+    icon: _first(entry.weather).main.toLowerCase(),
     temperature: Math.round(entry.main.temp - 273.15),
     time: moment(entry.dt_txt),
   }));

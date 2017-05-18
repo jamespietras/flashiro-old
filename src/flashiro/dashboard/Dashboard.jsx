@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _map from 'lodash/map';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -6,10 +6,10 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Clock from './applets/Clock';
-import Spinner from '../Spinner';
+import Spinner from 'flashiro/utilities/Spinner';
 import Weather from './applets/Weather';
-import { loadCnnHeadlines } from '../../actions/headlines';
-import { loadWeatherForecast } from '../../actions/weather';
+import { loadCnnHeadlines } from 'flashiro/actions/headlines';
+import { loadWeatherForecast } from 'flashiro/actions/weather';
 
 import './Dashboard.scss';
 
@@ -68,7 +68,7 @@ class Dashboard extends Component {
           <Spinner />
           :
           <ListGroup>
-            {_.map(this.props.cnnHeadlines, (headline, index) => (
+            {_map(this.props.cnnHeadlines, (headline, index) => (
               <ListGroupItem key={index} href={headline.url}>
                 <h4>{headline.title}</h4>
               </ListGroupItem>

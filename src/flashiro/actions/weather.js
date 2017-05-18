@@ -1,6 +1,6 @@
-import _ from 'lodash';
+import _pick from 'lodash/pick';
 
-import Api from './_api';
+import Api from 'flashiro/api';
 
 export const ERROR_WEATHER_FORECAST = 'weather:errorWeatherForecast';
 export const LOADED_WEATHER_FORECAST = 'weather:loadedWeatherForecast';
@@ -25,7 +25,7 @@ export function loadWeatherForecast() {
       Api.queryWeather(coords.latitude, coords.longitude).then((response) => {
         dispatch({
           type: LOADED_WEATHER_FORECAST,
-          payload: _.pick(response.data, ['city', 'list']),
+          payload: _pick(response.data, ['city', 'list']),
         });
       }).catch((error) => {
         dispatch({

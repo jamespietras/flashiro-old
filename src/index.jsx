@@ -5,8 +5,8 @@ import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import { Provider } from 'react-redux';
 
-import rootReducer from './reducers';
-import routes from './routes';
+import rootReducer from 'flashiro/reducers';
+import routes from 'flashiro/routes';
 
 const loggerMiddleware = createLogger({
   collapsed: true,

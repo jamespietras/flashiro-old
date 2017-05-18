@@ -1,4 +1,4 @@
-import Api from './_api';
+import Api from 'flashiro/api';
 
 export const LOADED_CNN_HEADLINES = 'headlines:loadedCnnHeadlines';
 export const LOADING_CNN_HEADLINES = 'headlines:loadingCnnHeadlines';

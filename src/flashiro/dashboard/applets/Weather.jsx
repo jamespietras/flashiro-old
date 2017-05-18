@@ -1,12 +1,17 @@
-import _ from 'lodash';
+import _capitalize from 'lodash/capitalize';
+import _isEmpty from 'lodash/isEmpty';
+import _map from 'lodash/map';
+import _max from 'lodash/max';
+import _min from 'lodash/min';
+import _minBy from 'lodash/minBy';
 import classnames from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import ErrorMessage from '../../ErrorMessage';
-import Spinner from '../../Spinner';
+import ErrorMessage from 'flashiro/utilities/ErrorMessage';
+import Spinner from 'flashiro/utilities/Spinner';
 
 import './Weather.scss';
 
@@ -68,7 +73,7 @@ class Weather extends Component {
       );
     }
 
-    if (this.props.loading || _.isEmpty(this.props.forecast)) {
+    if (this.props.loading || _isEmpty(this.props.forecast)) {
       return (
         <div className="weather--not-loaded">
           <Spinner />
@@ -76,7 +81,7 @@ class Weather extends Component {
       );
     }
 
-    const closestEntry = _.minBy(this.props.forecast, entry => entry.time.diff());
+    const closestEntry = _minBy(this.props.forecast, entry => entry.time.diff());
 
     return (
       <div>
@@ -91,7 +96,7 @@ class Weather extends Component {
             </div>
 
             <div className="weather__current-description">
-              {_.capitalize(closestEntry.description)}
+              {_capitalize(closestEntry.description)}
             </div>
           </div>
         </div>
@@ -101,10 +106,10 @@ class Weather extends Component {
           {this.props.city}
 
           <FontAwesome className="weather__info-icon" name="caret-up" />
-          {_.max(_.map(this.props.forecast, 'temperature'))}&deg;
+          {_max(_map(this.props.forecast, 'temperature'))}&deg;
 
           <FontAwesome className="weather__info-icon" name="caret-down" />
-          {_.min(_.map(this.props.forecast, 'temperature'))}&deg;
+          {_min(_map(this.props.forecast, 'temperature'))}&deg;
         </div>
 
         <ul
@@ -114,7 +119,7 @@ class Weather extends Component {
             'list-unstyled',
           )}
         >
-          {_.map(this.props.forecast, (entry, index) => (
+          {_map(this.props.forecast, (entry, index) => (
             <li key={index} className="clearfix">
               <span className="pull-left">{entry.time.format('HH:mm')}</span>
               <span className="weather__forecast-icon">
