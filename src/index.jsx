@@ -18,7 +18,7 @@ const store = createStore(
   rootReducer,
   applyMiddleware(
     thunkMiddleware,
-    loggerMiddleware,
+    loggerMiddleware, // logger must always be the last middleware
   ),
 );
 

@@ -2,7 +2,7 @@ import _map from 'lodash/map';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import Spinner from 'flashiro/utilities/Spinner';
@@ -51,30 +51,38 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <div className="dashboard__tile">
-          <Clock />
-        </div>
+        <Row>
+          <Col lg={4}>
+            <div className="dashboard__tile dashboard__tile--unpadded">
+              <Weather
+                city={this.props.weatherCity}
+                error={this.props.weatherError}
+                forecast={this.props.weatherForecast}
+                loading={this.props.weatherLoading}
+              />
+            </div>
+          </Col>
 
-        <div className="dashboard__tile dashboard__tile--unpadded">
-          <Weather
-            city={this.props.weatherCity}
-            error={this.props.weatherError}
-            forecast={this.props.weatherForecast}
-            loading={this.props.weatherLoading}
-          />
-        </div>
+          <Col lg={4}>
+            <div className="dashboard__tile">
+              <Clock />
+            </div>
+          </Col>
 
-        {this.props.loadingCnnHeadlines ?
-          <Spinner />
-          :
-          <ListGroup>
-            {_map(this.props.cnnHeadlines, (headline, index) => (
-              <ListGroupItem key={index} href={headline.url}>
-                <h4>{headline.title}</h4>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
-        }
+          <Col lg={4}>
+            {this.props.loadingCnnHeadlines ?
+              <Spinner />
+              :
+              <ListGroup>
+                {_map(this.props.cnnHeadlines, (headline, index) => (
+                  <ListGroupItem key={index} href={headline.url}>
+                    <h4>{headline.title}</h4>
+                  </ListGroupItem>
+                ))}
+              </ListGroup>
+            }
+          </Col>
+        </Row>
       </div>
     );
   }

@@ -1,4 +1,4 @@
 .spinner {
-  color: #3498db;
+  color: map-get($colors, 'blue');
   font-size: 32px;
 }
