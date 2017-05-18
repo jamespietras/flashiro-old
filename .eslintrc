@@ -1,11 +1,13 @@
-{
-  "extends": "airbnb",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
-  "env": {
-    "browser": true
-  }
-}
+extends:
+  - airbnb
+plugins:
+  - react
+  - jsx-a11y
+  - import
+env:
+  browser: true
+settings:
+  import/resolver:
+    node:
+      paths:
+        - src

@@ -5,11 +5,11 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import Clock from './applets/Clock';
 import Spinner from 'flashiro/utilities/Spinner';
-import Weather from './applets/Weather';
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
+import Clock from './applets/Clock';
+import Weather from './applets/Weather';
 
 import './Dashboard.scss';
 
