@@ -28,7 +28,7 @@
     "dev-action": "babel-node webpack.dev.babel.js || true",
     "dev-log": "npm run prefix && echo 'Starting development mode...\n'",
     "lint": "npm run lint-log && npm run lint-action && npm run lint-success",
-    "lint-action": "eslint --ext .jsx,.js ./ || true",
+    "lint-action": "eslint --ext .jsx,.js ./ --ignore-pattern .gitignore",
     "lint-log": "npm run prefix && echo 'Linting project code...'",
     "lint-success": "npm run prefix && echo 'Code linted.\n'",
     "prefix": "echo '\n\\033[1;97;104m[flashiro]\\033[0m \\c'",
@@ -36,6 +36,9 @@
     "postinstall": "npm run resolve-confirmation && npm run check",
     "resolve-confirmation": "npm run prefix && echo 'Dependencies resolved.'"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "babel": {
     "plugins": [
       "transform-es2015-modules-commonjs"
@@ -70,6 +73,7 @@
     "html-loader": "^0.4.5",
     "node-sass": "^4.5.2",
     "nsp": "^2.6.3",
+    "pre-commit": "^1.2.2",
     "react-hot-loader": "^1.3.1",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.17.0"
