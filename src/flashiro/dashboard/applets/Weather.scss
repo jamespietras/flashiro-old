@@ -52,24 +52,24 @@
     &--expanded {
       height: 268px;
     }
+  }
 
-    li {
-      height: 38px;
-      padding: 9px 11px;
-      position: relative;
+  &__forecast-entry {
+    height: 38px;
+    padding: 9px 11px;
+    position: relative;
 
-      &:nth-of-type(2n - 1) {
-        background-color: map-get($colors, 'cloudy');
-      }
+    &:nth-of-type(2n - 1) {
+      background-color: map-get($colors, 'cloudy');
+    }
 
-      &:nth-of-type(2n) {
-        background-color: map-get($colors, 'grey');
-      }
+    &:nth-of-type(2n) {
+      background-color: map-get($colors, 'grey');
+    }
 
-      &:last-of-type {
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-      }
+    &:last-of-type {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
   }
 

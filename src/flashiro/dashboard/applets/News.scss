@@ -1,0 +1,43 @@
+.news {
+  &__entry {
+    padding: 10px 12px 0;
+
+    &:not(:last-of-type) {
+      border-bottom: 2px solid map-get($colors, 'grey');
+    }
+  }
+
+  &__entry-description {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  &__entry-heading {
+    color: map-get($colors, 'blue-dark');
+    font-size: 16px;
+    margin: 0;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+  }
+
+  &__heading {
+    font-size: 21px;
+    margin-bottom: 3px;
+    margin-top: 0;
+  }
+
+  &__icon {
+    color: map-get($colors, 'blue');
+    font-size: 64px;
+    margin-right: 10px;
+  }
+
+  &__subheading {
+    display: block;
+    font-size: 16px;
+    margin: 0;
+  }
+}

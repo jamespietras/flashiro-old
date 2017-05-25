@@ -1,14 +1,13 @@
-import _map from 'lodash/map';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Col, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import Spinner from 'flashiro/utilities/Spinner';
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
+import News from './applets/News';
 import Weather from './applets/Weather';
 
 import './Dashboard.scss';
@@ -28,7 +27,7 @@ const propTypes = {
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     urlToImage: PropTypes.string.isRequired,
-  })),
+  })).isRequired,
   loadCnnHeadlines: PropTypes.func.isRequired,
   loadWeatherForecast: PropTypes.func.isRequired,
   loadingCnnHeadlines: PropTypes.bool.isRequired,
@@ -70,17 +69,12 @@ class Dashboard extends Component {
           </Col>
 
           <Col lg={4}>
-            {this.props.loadingCnnHeadlines ?
-              <Spinner />
-              :
-              <ListGroup>
-                {_map(this.props.cnnHeadlines, (headline, index) => (
-                  <ListGroupItem key={index} href={headline.url}>
-                    <h4>{headline.title}</h4>
-                  </ListGroupItem>
-                ))}
-              </ListGroup>
-            }
+            <div className="dashboard__tile">
+              <News
+                headlines={this.props.cnnHeadlines}
+                loading={this.props.loadingCnnHeadlines}
+              />
+            </div>
           </Col>
         </Row>
       </div>
