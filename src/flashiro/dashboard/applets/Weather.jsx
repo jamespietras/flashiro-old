@@ -4,7 +4,7 @@ import _map from 'lodash/map';
 import _max from 'lodash/max';
 import _min from 'lodash/min';
 import _minBy from 'lodash/minBy';
-import classnames from 'classnames';
+import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -113,7 +113,7 @@ class Weather extends Component {
         </div>
 
         <ul
-          className={classnames(
+          className={cx(
             'weather__forecast',
             this.state.expanded && 'weather__forecast--expanded',
             'list-unstyled',
