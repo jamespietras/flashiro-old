@@ -1,0 +1,101 @@
+.weather {
+  &--not-loaded {
+    padding: 18px 0;
+  }
+
+  &__current {
+    align-items: center;
+    display: flex;
+    padding: 18px 32px;
+  }
+
+  &__current-icon {
+    color: map-get($colors, 'blue');
+    font-size: 42px;
+    margin-right: 12px;
+  }
+
+  &__current-description {
+    font-size: 16px;
+  }
+
+  &__current-temperature {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  &__expander {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    outline: none;
+    padding: 5px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__expander-icon {
+    color: map-get($colors, 'blue');
+    font-size: 21px;
+  }
+
+  &__forecast {
+    border-top: 2px solid map-get($colors, 'grey');
+    height: 2px;
+    margin: 0;
+    overflow: hidden;
+    transition: height 1s;
+    transition-timing-function: easeOutQuart;
+    transform: translate3d(0, 0, 0);
+
+    &--expanded {
+      height: 268px;
+    }
+  }
+
+  &__forecast-entry {
+    height: 38px;
+    padding: 9px 11px;
+    position: relative;
+
+    &:nth-of-type(2n - 1) {
+      background-color: map-get($colors, 'cloudy');
+    }
+
+    &:nth-of-type(2n) {
+      background-color: map-get($colors, 'grey');
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+
+  &__forecast-icon {
+    color: map-get($colors, 'blue');
+    font-size: 16px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__info {
+    align-items: center;
+    display: flex;
+    margin-bottom: 12px;
+    margin-left: 16px;
+  }
+
+  &__info-icon {
+    color: map-get($colors, 'blue');
+    font-size: 21px;
+    margin-right: 5px;
+
+    &:not(:first-of-type) {
+      margin-left: 12px;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+body,
+#root {
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+html {
+  min-height: 100vh;
+}
+
+.app {
+  background-attachment: fixed;
+  background-image: url('/background.png');
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}

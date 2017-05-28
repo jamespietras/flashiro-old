@@ -1,0 +1,21 @@
+.clock {
+  align-items: center;
+  display: flex;
+
+  &__date {
+    font-size: 14px;
+  }
+
+  &__icon {
+    color: map-get($colors, 'blue');
+    font-size: 46px;
+  }
+
+  &__info {
+    margin-left: 12px;
+  }
+
+  &__time {
+    font-size: 18px;
+  }
+}
