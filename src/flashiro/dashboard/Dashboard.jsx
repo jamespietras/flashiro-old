@@ -8,6 +8,7 @@ import { loadCnnHeadlines } from 'flashiro/actions/headlines';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
 import News from './applets/News';
+import Tasks from './applets/Tasks';
 import Weather from './applets/Weather';
 
 import './Dashboard.scss';
@@ -65,6 +66,10 @@ class Dashboard extends Component {
           <Col lg={4}>
             <div className="dashboard__tile">
               <Clock />
+            </div>
+
+            <div className="dashboard__tile dashboard__tile--unpadded">
+              <Tasks />
             </div>
           </Col>
 

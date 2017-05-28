@@ -1,0 +1,79 @@
+.tasks {
+  &__create {
+    margin: 0;
+  }
+
+  &__create-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: transform .5s;
+
+    &:hover {
+      transform: rotate3d(0, 0, 1, 360deg);
+    }
+  }
+
+  &__create-field,
+  &__create-field:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  &__create-icon {
+    color: map-get($colors, 'blue');
+    font-size: 24px;
+  }
+
+  &__list {
+    margin: 0;
+  }
+
+  // a very, very long entry about the hardships of life that should be cut with elipsis to check if it actually works
+  &__list-entry {
+    height: 36px;
+    overflow: hidden;
+    transition: height .5s;
+
+    &.manipulation-enter {
+      height: 0;
+    }
+
+    &.manipulation-enter-active {
+      height: 36px;
+    }
+
+    &:first-of-type {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    &:nth-of-type(2n - 1) {
+      background-color: map-get($colors, 'cloudy');
+    }
+
+    &:nth-of-type(2n) {
+      background-color: map-get($colors, 'grey');
+    }
+  }
+
+  &__list-entry-content {
+    padding: 8px 12px;
+  }
+
+  &__list-entry-title {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 32px);
+  }
+
+  &__priority {
+    color: map-get($colors, 'red');
+    float: right;
+    font-size: 16px;
+    width: 16px;
+  }
+}
