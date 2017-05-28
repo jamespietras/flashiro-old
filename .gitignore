@@ -1,11 +1,14 @@
 ## PACKAGES
-node_modules
+/node_modules
 
 ## CONFIGURATION
 .env
 
+## PRODUCTION BUILD
+/build
+
 ## LOGS
-logs
+/logs
 *.log
 npm-debug.log*
 
