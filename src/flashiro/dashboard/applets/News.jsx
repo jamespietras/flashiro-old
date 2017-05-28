@@ -80,8 +80,12 @@ class News extends Component {
                     </a>
                   </h4>
 
-                  {headline.publishedAt &&
-                    <small>{moment(headline.publishedAt).format('h:mma')}</small>
+                  {(headline.publishedAt || headline.author) &&
+                    <small>
+                      {moment(headline.publishedAt).format('h:mma')}
+                      {headline.publishedAt && headline.author && ' - '}
+                      {headline.author}
+                    </small>
                   }
 
                   <p className="news__entry-description">{headline.description}</p>
