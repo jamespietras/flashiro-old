@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -7,6 +8,7 @@ import PluginHtml from 'html-webpack-plugin';
 import PluginProgressBar from 'progress-bar-webpack-plugin';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+/* eslint-enable import/no-extraneous-dependencies */
 
 dotenv.config();
 
@@ -80,6 +82,11 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
@@ -90,7 +97,6 @@ const config = {
       openAnalyzer: false,
     }),
     new PluginHtml({
-      title: 'Flashiro',
       filename: path.join(__dirname, 'build/index.html'),
       template: path.join(__dirname, 'public/index.html'),
     }),
