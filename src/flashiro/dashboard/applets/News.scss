@@ -1,0 +1,98 @@
+.news {
+  &__content {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__entry {
+    padding: 10px 12px 0;
+
+    &:not(:last-of-type) {
+      border-bottom: 2px solid map-get($colors, 'grey');
+    }
+  }
+
+  &__entry-description {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+  &__entry-heading {
+    color: map-get($colors, 'blue-dark');
+    font-size: 16px;
+    margin: 0;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+  }
+
+  &__heading {
+    font-size: 21px;
+    margin-bottom: 3px;
+    margin-top: 0;
+  }
+
+  &__icon {
+    color: map-get($colors, 'blue');
+    font-size: 64px;
+    margin-right: 10px;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  &__navigation-button {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    left: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  &__navigation-dot {
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+
+    &--active {
+      &::after {
+        background-color: map-get($colors, 'blue');
+      }
+    }
+
+    &::after {
+      border: 2px solid map-get($colors, 'blue');
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 14px;
+      transition: background-color .5s;
+      width: 14px;
+    }
+
+    &:hover {
+      &::after {
+        background-color: map-get($colors, 'blue');
+      }
+    }
+  }
+
+  &__page-box {
+    flex: 0 0 100%;
+    transition: transform .5s;
+  }
+
+  &__subheading {
+    display: block;
+    font-size: 16px;
+    margin: 0;
+  }
+}

@@ -1,6 +1,6 @@
 body,
 #root {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
@@ -8,10 +8,13 @@ body {
 }
 
 html {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .app {
+  background-attachment: fixed;
   background-image: url('/background.png');
-  height: 100%;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
 }

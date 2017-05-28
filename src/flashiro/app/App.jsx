@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
 import './App.scss';
 
@@ -12,11 +12,7 @@ function App(props) {
   return (
     <div className="app">
       <Grid>
-        <Row>
-          <Col sm={6} smOffset={3} lg={4} lgOffset={4}>
-            {props.children}
-          </Col>
-        </Row>
+        {props.children}
       </Grid>
     </div>
   );

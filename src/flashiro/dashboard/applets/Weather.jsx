@@ -4,7 +4,7 @@ import _map from 'lodash/map';
 import _max from 'lodash/max';
 import _min from 'lodash/min';
 import _minBy from 'lodash/minBy';
-import classnames from 'classnames';
+import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -52,7 +52,7 @@ class Weather extends Component {
     super(props);
 
     this.state = {
-      expanded: false,
+      expanded: true,
     };
 
     this.toggleExpansion = this.toggleExpansion.bind(this);
@@ -113,18 +113,20 @@ class Weather extends Component {
         </div>
 
         <ul
-          className={classnames(
+          className={cx(
             'weather__forecast',
             this.state.expanded && 'weather__forecast--expanded',
             'list-unstyled',
           )}
         >
           {_map(this.props.forecast, (entry, index) => (
-            <li key={index} className="clearfix">
+            <li key={index} className="clearfix weather__forecast-entry">
               <span className="pull-left">{entry.time.format('HH:mm')}</span>
+
               <span className="weather__forecast-icon">
                 {getIconFor(entry.icon)}
               </span>
+
               <span className="pull-right">{entry.temperature}&deg;</span>
             </li>
           ))}

@@ -1,6 +1,7 @@
 import _pick from 'lodash/pick';
 
 import Api from 'flashiro/api';
+import Navigator from 'flashiro/tools/navigator';
 
 export const ERROR_WEATHER_FORECAST = 'weather:errorWeatherForecast';
 export const LOADED_WEATHER_FORECAST = 'weather:loadedWeatherForecast';
@@ -10,7 +11,7 @@ export function loadWeatherForecast() {
   return (dispatch) => {
     dispatch({ type: LOADING_WEATHER_FORECAST });
 
-    if (!navigator.geolocation) {
+    if (!Navigator.isAvailable()) {
       dispatch({
         type: ERROR_WEATHER_FORECAST,
         payload: 'Geolocation not supported',
@@ -19,25 +20,20 @@ export function loadWeatherForecast() {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition((position) => {
+    Navigator.getCurrentPosition().then((position) => {
       const { coords } = position;
 
-      Api.queryWeather(coords.latitude, coords.longitude).then((response) => {
-        dispatch({
-          type: LOADED_WEATHER_FORECAST,
-          payload: _pick(response.data, ['city', 'list']),
-        });
-      }).catch((error) => {
-        dispatch({
-          type: ERROR_WEATHER_FORECAST,
-          payload: error.message,
-        });
-      });
-    }, (error) => {
+      return Api.queryWeather(coords.latitude, coords.longitude);
+    }).then(response => (
+      dispatch({
+        type: LOADED_WEATHER_FORECAST,
+        payload: _pick(response.data, ['city', 'list']),
+      })
+    )).catch(error => (
       dispatch({
         type: ERROR_WEATHER_FORECAST,
         payload: error.message,
-      });
-    });
+      })
+    ));
   };
 }
