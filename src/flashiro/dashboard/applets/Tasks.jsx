@@ -1,4 +1,6 @@
+import _filter from 'lodash/filter';
 import _map from 'lodash/map';
+import _uniqueId from 'lodash/uniqueId';
 import FontAwesome from 'react-fontawesome';
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -13,22 +15,29 @@ class Tasks extends Component {
     this.state = {
       createFieldValue: '',
       todoList: [
-        { title: 'Cook the dinner', priority: false },
-        { title: 'Buy the book', priority: false },
-        { title: 'Pay the rent', priority: true },
-        { title: 'Tidy up the closet', priority: false },
+        { id: _uniqueId(), title: 'Cook the dinner', priority: false },
+        { id: _uniqueId(), title: 'Buy the book', priority: false },
+        { id: _uniqueId(), title: 'Pay the rent', priority: true },
+        { id: _uniqueId(), title: 'Tidy up the closet', priority: false },
       ],
     };
 
+    this.completeTask = this.completeTask.bind(this);
     this.createTask = this.createTask.bind(this);
     this.updateCreateValue = this.updateCreateValue.bind(this);
+  }
+
+  completeTask(taskId) {
+    this.setState({
+      todoList: _filter(this.state.todoList, entry => entry.id !== taskId),
+    });
   }
 
   createTask() {
     this.setState({
       createFieldValue: '',
       todoList: this.state.todoList.concat([
-        { title: this.state.createFieldValue, priority: true },
+        { id: _uniqueId(), title: this.state.createFieldValue, priority: true },
       ]),
     });
   }
@@ -55,12 +64,22 @@ class Tasks extends Component {
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
           >
-            {_map(this.state.todoList, (entry, index) => (
-              <li key={index} className="tasks__list-entry">
+            {_map(this.state.todoList, entry => (
+              <li key={entry.id} className="tasks__list-entry">
                 <div className="tasks__list-entry-content">
-                  <span className="tasks__list-entry-title">{entry.title}</span>
+                  <button
+                    className="tasks__list-completion-action"
+                    onClick={() => this.completeTask(entry.id)}
+                  >
+                    <FontAwesome name="check" />
+                  </button>
+
+                  <span className="tasks__list-entry-title">
+                    {entry.title}
+                  </span>
+
                   {entry.priority &&
-                    <FontAwesome className="tasks__priority" name="exclamation-triangle" />
+                    <FontAwesome className="tasks__priority" name="exclamation" />
                   }
                 </div>
               </li>
@@ -73,7 +92,7 @@ class Tasks extends Component {
             <FormControl
               className="tasks__create-field"
               type="text"
-              maxLength="150"
+              maxLength="42"
               value={this.state.createFieldValue}
               onChange={event => this.updateCreateValue(event.target.value)}
             />
