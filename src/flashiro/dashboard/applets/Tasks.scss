@@ -1,14 +1,17 @@
 .tasks {
   &__create {
     display: flex;
+    padding: 5px;
   }
 
   &__create-button {
     background-color: transparent;
     border: none;
     border-radius: 50%;
+    height: 34px;
     outline: none;
     transition: background-color .5s;
+    width: 34px;
 
     &:hover {
       background-color: rgba(map-get($colors, 'black'), .1);
@@ -64,25 +67,27 @@
   }
 
   &__list-entry {
+    cursor: pointer;
     height: 36px;
     overflow: hidden;
-    cursor: pointer;
-    transition: background-color .5s, height .5s;
+    transition: background-color .5s;
 
     &.manipulation-enter {
       height: 0;
-    }
 
-    &.manipulation-enter-active {
-      height: 36px;
+      &.manipulation-enter-active {
+        height: 36px;
+        transition: background-color .5s, height .5s;
+      }
     }
 
     &.manipulation-leave {
       height: 36px;
-    }
 
-    &.manipulation-leave-active {
-      height: 0;
+      &.manipulation-leave-active {
+        height: 0;
+        transition: background-color .5s, height .5s;
+      }
     }
 
     &:hover {

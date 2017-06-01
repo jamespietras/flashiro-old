@@ -3,7 +3,7 @@ import _map from 'lodash/map';
 import _uniqueId from 'lodash/uniqueId';
 import FontAwesome from 'react-fontawesome';
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { FormControl } from 'react-bootstrap';
 
 import './Tasks.scss';
@@ -39,7 +39,7 @@ class Tasks extends Component {
     this.setState({
       createFieldValue: '',
       todoList: this.state.todoList.concat([
-        { id: _uniqueId(), title: this.state.createFieldValue, priority: true },
+        { id: _uniqueId(), title: this.state.createFieldValue, priority: false },
       ]),
     });
   }
@@ -61,7 +61,7 @@ class Tasks extends Component {
         </header>
 
         <ul className="list-unstyled tasks__list">
-          <ReactCSSTransitionGroup
+          <CSSTransitionGroup
             transitionName="manipulation"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
@@ -86,7 +86,7 @@ class Tasks extends Component {
                 </div>
               </li>
             ))}
-          </ReactCSSTransitionGroup>
+          </CSSTransitionGroup>
         </ul>
 
         <form className="tasks__create" onSubmit={this.createTask}>
@@ -100,7 +100,7 @@ class Tasks extends Component {
           />
 
           <button className="tasks__create-button" type="submit">
-            <FontAwesome className="tasks__create-icon" name="plus-circle" />
+            <FontAwesome className="tasks__create-icon" name="plus" />
           </button>
         </form>
       </div>
