@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -8,7 +7,6 @@ import PluginHtml from 'html-webpack-plugin';
 import PluginProgressBar from 'progress-bar-webpack-plugin';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-/* eslint-enable import/no-extraneous-dependencies */
 
 dotenv.config();
 
@@ -30,7 +28,7 @@ const config = {
   entry: [
     `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
     'webpack/hot/dev-server',
-    path.join(__dirname, './src/index.jsx'),
+    './src/index.jsx',
   ],
   output: {
     path: path.join(__dirname, 'build'),

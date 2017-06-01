@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import chalk from 'chalk';
 import path from 'path';
 import PluginClean from 'clean-webpack-plugin';
@@ -6,12 +5,11 @@ import PluginExtractText from 'extract-text-webpack-plugin';
 import PluginHtml from 'html-webpack-plugin';
 import PluginProgressBar from 'progress-bar-webpack-plugin';
 import webpack from 'webpack';
-/* eslint-enable import/no-extraneous-dependencies */
 
 const config = {
   target: 'web',
   entry: [
-    path.join(__dirname, './src/index.jsx'),
+    './src/index.jsx',
   ],
   output: {
     path: path.join(__dirname, 'build'),
@@ -32,7 +30,6 @@ const config = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: [
-          'react-hot-loader',
           {
             loader: 'babel-loader',
             options: {
@@ -41,7 +38,6 @@ const config = {
             },
           },
         ],
-        include: __dirname,
       }, {
         test: /\.scss$/,
         loader: PluginExtractText.extract({
@@ -74,9 +70,9 @@ const config = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
