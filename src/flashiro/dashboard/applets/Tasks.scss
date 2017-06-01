@@ -26,11 +26,26 @@
     font-size: 24px;
   }
 
+  &__header {
+    align-items: center;
+    display: flex;
+    padding: 16px 14px;
+  }
+
+  &__header-icon {
+    color: map-get($colors, 'blue');
+    font-size: 42px;
+    margin-right: 12px;
+  }
+
+  &__heading {
+    margin: 0;
+  }
+
   &__list {
     margin: 0;
   }
 
-  // a very, very long entry about the hardships of life that should be cut with elipsis to check if it actually works
   &__list-entry {
     height: 36px;
     overflow: hidden;

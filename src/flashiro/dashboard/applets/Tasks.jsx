@@ -40,6 +40,15 @@ class Tasks extends Component {
   render() {
     return (
       <div>
+        <header className="tasks__header">
+          <FontAwesome className="tasks__header-icon" name="file-text-o" />
+
+          <div>
+            <h3 className="tasks__heading">Tasks</h3>
+            <div>Ongoing / Archive</div>
+          </div>
+        </header>
+
         <ul className="list-unstyled tasks__list">
           <ReactCSSTransitionGroup
             transitionName="manipulation"
