@@ -1,16 +1,17 @@
 .tasks {
   &__create {
-    margin: 0;
+    display: flex;
   }
 
   &__create-button {
     background-color: transparent;
     border: none;
+    border-radius: 50%;
     outline: none;
-    transition: transform .5s;
+    transition: background-color .5s;
 
     &:hover {
-      transform: rotate3d(0, 0, 1, 360deg);
+      background-color: rgba(map-get($colors, 'black'), .1);
     }
   }
 
@@ -39,6 +40,7 @@
   }
 
   &__heading {
+    font-size: 21px;
     margin: 0;
   }
 
@@ -48,10 +50,9 @@
 
   &__list-completion-action {
     align-items: center;
-    background-color: map-get($colors, 'green');
+    background-color: map-get($colors, 'blue');
     border: none;
     color: map-get($colors, 'white');
-    cursor: pointer;
     display: flex;
     flex: 0 0 0;
     font-size: 18px;
@@ -65,6 +66,7 @@
   &__list-entry {
     height: 36px;
     overflow: hidden;
+    cursor: pointer;
     transition: background-color .5s, height .5s;
 
     &.manipulation-enter {

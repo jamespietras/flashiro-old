@@ -4,7 +4,7 @@ import _uniqueId from 'lodash/uniqueId';
 import FontAwesome from 'react-fontawesome';
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { FormControl, FormGroup, InputGroup } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
 
 import './Tasks.scss';
 
@@ -33,7 +33,9 @@ class Tasks extends Component {
     });
   }
 
-  createTask() {
+  createTask(event) {
+    event.preventDefault();
+
     this.setState({
       createFieldValue: '',
       todoList: this.state.todoList.concat([
@@ -71,7 +73,7 @@ class Tasks extends Component {
                     className="tasks__list-completion-action"
                     onClick={() => this.completeTask(entry.id)}
                   >
-                    <FontAwesome name="check" />
+                    <FontAwesome name="pencil" />
                   </button>
 
                   <span className="tasks__list-entry-title">
@@ -87,23 +89,20 @@ class Tasks extends Component {
           </ReactCSSTransitionGroup>
         </ul>
 
-        <FormGroup className="tasks__create">
-          <InputGroup>
-            <FormControl
-              className="tasks__create-field"
-              type="text"
-              maxLength="42"
-              value={this.state.createFieldValue}
-              onChange={event => this.updateCreateValue(event.target.value)}
-            />
+        <form className="tasks__create" onSubmit={this.createTask}>
+          <FormControl
+            className="tasks__create-field"
+            type="text"
+            maxLength="150"
+            placeholder="Add a task..."
+            value={this.state.createFieldValue}
+            onChange={event => this.updateCreateValue(event.target.value)}
+          />
 
-            <InputGroup.Button>
-              <button className="tasks__create-button" onClick={this.createTask}>
-                <FontAwesome className="tasks__create-icon" name="plus-square" />
-              </button>
-            </InputGroup.Button>
-          </InputGroup>
-        </FormGroup>
+          <button className="tasks__create-button" type="submit">
+            <FontAwesome className="tasks__create-icon" name="plus-circle" />
+          </button>
+        </form>
       </div>
     );
   }
