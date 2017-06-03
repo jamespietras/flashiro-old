@@ -37,7 +37,8 @@
     "lint-success": "npm run prefix && echo 'Code linted.\n'",
     "prefix": "echo '\n\\033[1;97;104m[flashiro]\\033[0m \\c'",
     "resolve-confirmation": "npm run prefix && echo 'Dependencies resolved.'",
-    "setup": "npm run compress && npm install && npm run resolve-confirmation && npm run check"
+    "setup": "npm run compress && npm install && npm run resolve-confirmation && npm run check",
+    "updates": "npm run prefix && echo 'Finding updates for used packages...' && ncu || true"
   },
   "pre-commit": [
     "lint"
@@ -60,10 +61,11 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "npm-check-updates": "^2.11.2",
     "pre-commit": "^1.2.2"
   },
   "dependencies": {
@@ -78,7 +80,7 @@
     "chalk": "^1.1.3",
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.16",
-    "css-loader": "^0.28.1",
+    "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
@@ -105,7 +107,7 @@
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.1",
     "webpack": "^2.5.1",
     "webpack-bundle-analyzer": "^2.8.1",
     "webpack-dev-server": "^2.4.5"

@@ -45,17 +45,9 @@ const config = {
           use: [
             {
               loader: 'css-loader',
-              query: {
-                minimize: true,
-                root: '.',
-              },
+              query: { minimize: true, root: '.' },
             },
-            {
-              loader: 'sass-loader',
-              options: {
-                data: '@import "./src/styles/index";',
-              },
-            },
+            'sass-loader',
           ],
         }),
       }, {
