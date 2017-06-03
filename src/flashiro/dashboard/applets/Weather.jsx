@@ -120,14 +120,14 @@ class Weather extends Component {
           )}
         >
           {_map(this.props.forecast, (entry, index) => (
-            <li key={index} className="clearfix weather__forecast-entry">
-              <span className="pull-left">{entry.time.format('HH:mm')}</span>
+            <li key={index} className="weather__forecast-entry">
+              <span className="weather__forecast-time">{entry.time.format('HH:mm')}</span>
 
               <span className="weather__forecast-icon">
                 {getIconFor(entry.icon)}
               </span>
 
-              <span className="pull-right">{entry.temperature}&deg;</span>
+              <span className="weather__forecast-temperature">{entry.temperature}&deg;</span>
             </li>
           ))}
         </ul>

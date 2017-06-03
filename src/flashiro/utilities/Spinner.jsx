@@ -4,8 +4,8 @@ import React from 'react';
 import './Spinner.scss';
 
 const Spinner = () => (
-  <div className="text-center">
-    <FontAwesome className="spinner" name="refresh" spin />
+  <div className="spinner">
+    <FontAwesome className="spinner__icon" name="refresh" spin />
   </div>
 );
 

@@ -9,7 +9,7 @@ const propTypes = {
 };
 
 const ErrorMessage = props => (
-  <div className="error-message text-center">
+  <div className="error-message">
     <FontAwesome className="error-message__icon" name="warning" />
     <span className="error-message__text">{props.message}</span>
   </div>

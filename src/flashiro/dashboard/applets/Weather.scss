@@ -79,6 +79,14 @@
     transform: translate(-50%, -50%);
   }
 
+  &__forecast-time {
+    float: left;
+  }
+
+  &__forecast-temperature {
+    float: right;
+  }
+
   &__info {
     align-items: center;
     display: flex;
