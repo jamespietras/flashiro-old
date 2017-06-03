@@ -66,12 +66,7 @@ const config = {
             loader: 'css-loader',
             query: { root: '.' },
           },
-          {
-            loader: 'sass-loader',
-            options: {
-              data: '@import "./src/styles/index";',
-            },
-          },
+          'sass-loader',
         ],
       }, {
         test: /\.(eot|svg|ttf|woff|woff2|jpg|png|gif)$/,

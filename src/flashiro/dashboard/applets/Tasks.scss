@@ -1,3 +1,5 @@
+@import '~styles/colors';
+
 .tasks {
   &__create {
     display: flex;
@@ -54,13 +56,11 @@
   &__list-completion-action {
     align-items: center;
     background-color: map-get($colors, 'blue');
-    border: none;
     color: map-get($colors, 'white');
     display: flex;
     flex: 0 0 0;
     font-size: 18px;
     justify-content: center;
-    outline: none;
     overflow: hidden;
     padding: 0;
     transition: flex-basis .5s;
@@ -111,7 +111,14 @@
   }
 
   &__list-entry-content {
+    align-items: stretch;
+    background-color: transparent;
+    border: none;
     display: flex;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
   }
 
   &__list-entry-title {

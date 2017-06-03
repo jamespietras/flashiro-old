@@ -4,7 +4,7 @@ import _uniqueId from 'lodash/uniqueId';
 import FontAwesome from 'react-fontawesome';
 import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
-import { FormControl } from 'react-bootstrap';
+import { FormControl, Nav, NavItem, Tab } from 'react-bootstrap';
 
 import './Tasks.scss';
 
@@ -14,17 +14,24 @@ class Tasks extends Component {
 
     this.state = {
       createFieldValue: '',
+      tabsId: null,
       todoList: [
-        { id: _uniqueId(), title: 'Cook the dinner', priority: false },
-        { id: _uniqueId(), title: 'Buy the book', priority: false },
-        { id: _uniqueId(), title: 'Pay the rent', priority: true },
-        { id: _uniqueId(), title: 'Tidy up the closet', priority: false },
+        { id: _uniqueId('task_'), title: 'Cook the dinner', priority: false },
+        { id: _uniqueId('task_'), title: 'Buy the book', priority: false },
+        { id: _uniqueId('task_'), title: 'Pay the rent', priority: true },
+        { id: _uniqueId('task_'), title: 'Tidy up the closet', priority: false },
       ],
     };
 
     this.completeTask = this.completeTask.bind(this);
     this.createTask = this.createTask.bind(this);
     this.updateCreateValue = this.updateCreateValue.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({
+      tabsId: _uniqueId('tabs_'),
+    });
   }
 
   completeTask(taskId) {
@@ -39,7 +46,7 @@ class Tasks extends Component {
     this.setState({
       createFieldValue: '',
       todoList: this.state.todoList.concat([
-        { id: _uniqueId(), title: this.state.createFieldValue, priority: false },
+        { id: _uniqueId('task_'), title: this.state.createFieldValue, priority: false },
       ]),
     });
   }
@@ -51,43 +58,64 @@ class Tasks extends Component {
   render() {
     return (
       <div>
-        <header className="tasks__header">
-          <FontAwesome className="tasks__header-icon" name="file-text-o" />
-
+        <Tab.Container id={this.state.tabsId} defaultActiveKey="ongoing">
           <div>
-            <h3 className="tasks__heading">Tasks</h3>
-            <div>Ongoing / Archive</div>
-          </div>
-        </header>
+            <header className="tasks__header">
+              <FontAwesome className="tasks__header-icon" name="file-text-o" />
 
-        <ul className="list-unstyled tasks__list">
-          <CSSTransitionGroup
-            transitionName="manipulation"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-          >
-            {_map(this.state.todoList, entry => (
-              <li key={entry.id} className="tasks__list-entry">
-                <div className="tasks__list-entry-content">
-                  <button
-                    className="tasks__list-completion-action"
-                    onClick={() => this.completeTask(entry.id)}
+              <div>
+                <h3 className="tasks__heading">Tasks</h3>
+              </div>
+
+              <Nav bsStyle="pills">
+                <NavItem eventKey="ongoing">
+                  Ongoing
+                </NavItem>
+
+                <NavItem eventKey="archive">
+                  Archive
+                </NavItem>
+              </Nav>
+            </header>
+
+            <Tab.Content animation>
+              <Tab.Pane eventKey="ongoing">
+                <ul className="list-unstyled tasks__list">
+                  <CSSTransitionGroup
+                    transitionName="manipulation"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                   >
-                    <FontAwesome name="pencil" />
-                  </button>
+                    {_map(this.state.todoList, entry => (
+                      <li key={entry.id} className="tasks__list-entry">
+                        <button
+                          className="tasks__list-entry-content"
+                          onClick={() => this.completeTask(entry.id)}
+                        >
+                          <div className="tasks__list-completion-action">
+                            <FontAwesome name="pencil" />
+                          </div>
 
-                  <span className="tasks__list-entry-title">
-                    {entry.title}
-                  </span>
+                          <span className="tasks__list-entry-title">
+                            {entry.title}
+                          </span>
 
-                  {entry.priority &&
-                    <FontAwesome className="tasks__priority" name="exclamation" />
-                  }
-                </div>
-              </li>
-            ))}
-          </CSSTransitionGroup>
-        </ul>
+                          {entry.priority &&
+                            <FontAwesome className="tasks__priority" name="exclamation" />
+                          }
+                        </button>
+                      </li>
+                    ))}
+                  </CSSTransitionGroup>
+                </ul>
+              </Tab.Pane>
+
+              <Tab.Pane eventKey="archive">
+                Archive view - in progress.
+              </Tab.Pane>
+            </Tab.Content>
+          </div>
+        </Tab.Container>
 
         <form className="tasks__create" onSubmit={this.createTask}>
           <FormControl
