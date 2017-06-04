@@ -6,6 +6,8 @@ import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FormControl } from 'react-bootstrap';
 
+import OverflowTooltip from 'flashiro/utilities/OverflowTooltip';
+
 import './Tasks.scss';
 
 const propTypes = {
@@ -73,10 +75,11 @@ class Tasks extends Component {
                     <FontAwesome name="check" />
                   </div>
 
-                  <span className="tasks__list-entry-title">
-                    {entry.title}
-                  </span>
-
+                  <OverflowTooltip content={entry.title}>
+                    <span className="tasks__list-entry-title">
+                      {entry.title}
+                    </span>
+                  </OverflowTooltip>
                 </button>
 
                 <button

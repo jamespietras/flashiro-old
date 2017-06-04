@@ -116,16 +116,17 @@
     background-color: transparent;
     border: none;
     display: flex;
+    flex: 1 1 0;
     outline: none;
     padding: 0;
     text-align: left;
-    width: 100%;
+    width: 0;
   }
 
   &__list-entry-title {
     display: inline-block;
     overflow: hidden;
-    padding: 8px 12px;
+    padding: 8px 0 8px 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: calc(100% - 64px);
