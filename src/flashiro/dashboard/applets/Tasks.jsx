@@ -1,16 +1,22 @@
-import _filter from 'lodash/filter';
 import _map from 'lodash/map';
-import _uniqueId from 'lodash/uniqueId';
+import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FormControl } from 'react-bootstrap';
 
 import './Tasks.scss';
 
-const tabs = {
-  ARCHIVE: 1,
-  ONGOING: 2,
+const propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    priority: PropTypes.bool.isRequired,
+  })).isRequired,
+  onTaskCreation: PropTypes.func.isRequired,
+  onTaskCompletion: PropTypes.func.isRequired,
+  onTaskPriorityToggle: PropTypes.func.isRequired,
 };
 
 class Tasks extends Component {
@@ -18,49 +24,11 @@ class Tasks extends Component {
     super(props);
 
     this.state = {
-      archiveList: [
-        { id: _uniqueId('task_'), title: 'Clean up the laptop', priority: false },
-        { id: _uniqueId('task_'), title: 'Feed cats', priority: false },
-        { id: _uniqueId('task_'), title: 'Close the flat', priority: true },
-        { id: _uniqueId('task_'), title: 'Restock water', priority: false },
-      ],
       createFieldValue: '',
-      ongoingList: [
-        { id: _uniqueId('task_'), title: 'Cook the dinner', priority: false },
-        { id: _uniqueId('task_'), title: 'Buy the book', priority: false },
-        { id: _uniqueId('task_'), title: 'Pay the rent', priority: true },
-        { id: _uniqueId('task_'), title: 'Tidy up the closet', priority: false },
-      ],
-      tab: tabs.ONGOING,
     };
 
-    this.getActiveTodoList = this.getActiveTodoList.bind(this);
-    this.changeTab = this.changeTab.bind(this);
-    this.completeTask = this.completeTask.bind(this);
     this.createTask = this.createTask.bind(this);
     this.updateCreateValue = this.updateCreateValue.bind(this);
-  }
-
-  getActiveTodoList() {
-    switch (this.state.tab) {
-      case tabs.ARCHIVE:
-        return this.state.archiveList;
-      case tabs.ONGOING:
-        return this.state.ongoingList;
-      default:
-    }
-
-    return [];
-  }
-
-  changeTab(newTabId) {
-    this.setState({ tab: newTabId });
-  }
-
-  completeTask(taskId) {
-    this.setState({
-      todoList: _filter(this.state.todoList, entry => entry.id !== taskId),
-    });
   }
 
   createTask(event) {
@@ -68,10 +36,9 @@ class Tasks extends Component {
 
     this.setState({
       createFieldValue: '',
-      ongoingList: this.state.ongoingList.concat([
-        { id: _uniqueId('task_'), title: this.state.createFieldValue, priority: false },
-      ]),
     });
+
+    this.props.onTaskCreation(this.state.createFieldValue);
   }
 
   updateCreateValue(newValue) {
@@ -83,10 +50,7 @@ class Tasks extends Component {
       <div>
         <header className="tasks__header">
           <FontAwesome className="tasks__header-icon" name="file-text-o" />
-          <h3 className="tasks__heading">Tasks</h3>
-
-          <button onClick={() => this.changeTab(tabs.ONGOING)}>Ongoing</button>
-          <button onClick={() => this.changeTab(tabs.ARCHIVE)}>Archive</button>
+          <h3 className="tasks__heading">Important tasks</h3>
         </header>
 
         <ul className="list-unstyled tasks__list">
@@ -95,23 +59,33 @@ class Tasks extends Component {
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
           >
-            {_map(this.getActiveTodoList(), entry => (
+            {_map(this.props.list, entry => (
               <li key={entry.id} className="tasks__list-entry">
                 <button
                   className="tasks__list-entry-content"
-                  onClick={() => this.completeTask(entry.id)}
+                  onClick={() => this.props.onTaskCompletion(entry.id)}
                 >
                   <div className="tasks__list-completion-action">
-                    <FontAwesome name="pencil" />
+                    <FontAwesome name="check" />
                   </div>
 
                   <span className="tasks__list-entry-title">
                     {entry.title}
                   </span>
 
-                  {entry.priority &&
-                    <FontAwesome className="tasks__priority" name="exclamation" />
-                  }
+                </button>
+
+                <button
+                  className="tasks__priority"
+                  onClick={() => this.props.onTaskPriorityToggle(entry.id)}
+                >
+                  <FontAwesome
+                    className={cx({
+                      'tasks__priority-icon': true,
+                      'tasks__priority-icon--active': entry.priority,
+                    })}
+                    name="exclamation"
+                  />
                 </button>
               </li>
             ))}
@@ -136,5 +110,7 @@ class Tasks extends Component {
     );
   }
 }
+
+Tasks.propTypes = propTypes;
 
 export default Tasks;
