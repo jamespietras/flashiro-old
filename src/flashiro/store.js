@@ -27,4 +27,8 @@ const store = createStore(
   applyMiddleware(...middleware),
 );
 
+store.subscribe(() => {
+  localStorage.setItem('tasks', JSON.stringify(store.getState().tasks.list));
+});
+
 export default store;

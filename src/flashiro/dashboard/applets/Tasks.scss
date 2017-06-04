@@ -1,0 +1,169 @@
+@import '~styles/colors';
+
+.tasks {
+  &__create {
+    display: flex;
+    padding: 5px;
+  }
+
+  &__create-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    height: 34px;
+    outline: none;
+    transition: background-color .5s;
+    width: 34px;
+
+    &:hover {
+      background-color: rgba(map-get($colors, 'black'), .1);
+    }
+  }
+
+  &__create-field,
+  &__create-field:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+  }
+
+  &__create-icon {
+    color: map-get($colors, 'blue');
+    font-size: 24px;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    padding: 16px 14px;
+  }
+
+  &__header-icon {
+    color: map-get($colors, 'blue');
+    font-size: 42px;
+    margin-right: 12px;
+  }
+
+  &__heading {
+    font-size: 21px;
+    margin: 0;
+  }
+
+  &__list {
+    margin: 0;
+  }
+
+  &__list-completion-action {
+    align-items: center;
+    background-color: map-get($colors, 'blue');
+    color: map-get($colors, 'white');
+    display: flex;
+    flex: 0 0 0;
+    font-size: 18px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0;
+    transition: flex-basis .5s;
+  }
+
+  &__list-entry {
+    cursor: pointer;
+    display: flex;
+    height: 36px;
+    overflow: hidden;
+    transition: background-color .5s;
+
+    &.manipulation-enter {
+      height: 0;
+
+      &.manipulation-enter-active {
+        height: 36px;
+        transition: background-color .5s, height .5s;
+      }
+    }
+
+    &.manipulation-leave {
+      height: 36px;
+
+      &.manipulation-leave-active {
+        height: 0;
+        transition: background-color .5s, height .5s;
+      }
+    }
+
+    &:hover {
+      .tasks__list-completion-action {
+        flex-basis: 42px;
+      }
+    }
+
+    &:first-of-type {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    &:nth-of-type(2n - 1) {
+      background-color: map-get($colors, 'cloudy');
+    }
+
+    &:nth-of-type(2n) {
+      background-color: map-get($colors, 'grey');
+    }
+  }
+
+  &__list-entry-content {
+    align-items: stretch;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex: 1 1 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    width: 0;
+  }
+
+  &__list-entry-title {
+    display: inline-block;
+    overflow: hidden;
+    padding: 8px 0 8px 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 64px);
+  }
+
+  &__priority {
+    align-items: center;
+    align-self: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    flex: 0 0 30px;
+    height: 30px;
+    justify-content: center;
+    margin: 0 6px;
+    outline: none;
+    transition: background-color .5s;
+
+    &:hover {
+      background-color: rgba(map-get($colors, 'red'), .2);
+
+      .tasks__priority-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__priority-icon {
+    color: rgba(map-get($colors, 'black'), .5);
+    font-size: 21px;
+    opacity: 0;
+    transition: color .5s, opacity .5s;
+
+    &--active {
+      color: map-get($colors, 'red');
+      opacity: 1;
+    }
+  }
+}

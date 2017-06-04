@@ -1,4 +1,10 @@
+@import '~styles/colors';
+
 .spinner {
-  color: map-get($colors, 'blue');
-  font-size: 32px;
+  text-align: center;
+
+  &__icon {
+    color: map-get($colors, 'blue');
+    font-size: 32px;
+  }
 }

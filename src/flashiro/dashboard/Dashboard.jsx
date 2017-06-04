@@ -5,9 +5,11 @@ import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
+import { completeTask, createTask, toggleTaskPriority } from 'flashiro/actions/tasks';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
 import News from './applets/News';
+import Tasks from './applets/Tasks';
 import Weather from './applets/Weather';
 
 import './Dashboard.scss';
@@ -28,9 +30,17 @@ const propTypes = {
     url: PropTypes.string.isRequired,
     urlToImage: PropTypes.string.isRequired,
   })).isRequired,
+  createTask: PropTypes.func.isRequired,
+  completeTask: PropTypes.func.isRequired,
   loadCnnHeadlines: PropTypes.func.isRequired,
   loadWeatherForecast: PropTypes.func.isRequired,
   loadingCnnHeadlines: PropTypes.bool.isRequired,
+  tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    priority: PropTypes.bool.isRequired,
+  })).isRequired,
+  toggleTaskPriority: PropTypes.func.isRequired,
   weatherCity: PropTypes.string,
   weatherError: PropTypes.string,
   weatherForecast: PropTypes.arrayOf(PropTypes.shape({
@@ -66,6 +76,15 @@ class Dashboard extends Component {
             <div className="dashboard__tile">
               <Clock />
             </div>
+
+            <div className="dashboard__tile dashboard__tile--unpadded">
+              <Tasks
+                list={this.props.tasks}
+                onTaskCreation={this.props.createTask}
+                onTaskCompletion={this.props.completeTask}
+                onTaskPriorityToggle={this.props.toggleTaskPriority}
+              />
+            </div>
           </Col>
 
           <Col lg={4}>
@@ -89,6 +108,7 @@ function mapStateToProps(state) {
   return {
     cnnHeadlines: state.headlines.cnn,
     loadingCnnHeadlines: state.headlines.loadingCnn,
+    tasks: state.tasks.list,
     weatherCity: state.weather.city,
     weatherError: state.weather.forecastError,
     weatherForecast: state.weather.forecast,
@@ -97,8 +117,11 @@ function mapStateToProps(state) {
 }
 
 const actions = {
+  completeTask,
+  createTask,
   loadCnnHeadlines,
   loadWeatherForecast,
+  toggleTaskPriority,
 };
 
 export default connect(mapStateToProps, actions)(Dashboard);

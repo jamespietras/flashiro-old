@@ -1,7 +1,10 @@
+@import '~styles/colors';
+
 .error-message {
   align-items: center;
   display: flex;
   justify-content: center;
+  text-align: center;
 
   &__icon {
     color: map-get($colors, 'red');
