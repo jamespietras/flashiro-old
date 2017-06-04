@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
-import { editNotes } from 'flashiro/actions/notes';
+import { clearNotes, editNotes } from 'flashiro/actions/notes';
 import { completeTask, createTask, toggleTaskPriority } from 'flashiro/actions/tasks';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
@@ -24,6 +24,7 @@ const defaultProps = {
 };
 
 const propTypes = {
+  clearNotes: PropTypes.func.isRequired,
   cnnHeadlines: PropTypes.arrayOf(PropTypes.shape({
     author: PropTypes.string,
     description: PropTypes.string.isRequired,
@@ -77,6 +78,7 @@ class Dashboard extends Component {
 
             <div className="dashboard__tile">
               <Notes
+                onNotesClear={this.props.clearNotes}
                 onNotesEdit={this.props.editNotes}
                 value={this.props.notes}
               />
@@ -129,6 +131,7 @@ function mapStateToProps(state) {
 }
 
 const actions = {
+  clearNotes,
   completeTask,
   createTask,
   editNotes,

@@ -1,12 +1,42 @@
 @import '~styles/colors';
 
 .notes {
+  &__clear {
+    background-color: transparent;
+    border: 1px solid map-get($colors, 'blue');
+    border-radius: 5px;
+    color: map-get($colors, 'blue');
+    letter-spacing: 1px;
+    margin-left: auto;
+    outline: none;
+    text-transform: uppercase;
+    transition: background-color .5s, color .5s;
+
+    &:hover {
+      background-color: map-get($colors, 'blue');
+      color: map-get($colors, 'white');
+    }
+  }
+
+  &__field {
+    border: 1px solid map-get($colors,  'grey');
+    border-radius: 3px;
+    height: 210px;
+    margin-bottom: 12px;
+    outline: none;
+    padding: 8px 12px;
+    resize: none;
+    width: 100%;
+  }
+
   &__header {
     align-items: center;
     display: flex;
+    margin-bottom: 12px;
   }
 
   &__heading {
+    font-size: 21px;
     margin: 0;
   }
 
@@ -14,5 +44,10 @@
     color: map-get($colors, 'blue');
     font-size: 42px;
     margin-right: 12px;
+  }
+
+  &__info {
+    align-items: center;
+    display: flex;
   }
 }

@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import './Notes.scss';
 
 const propTypes = {
+  onNotesClear: PropTypes.func.isRequired,
   onNotesEdit: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
@@ -30,14 +31,17 @@ class Notes extends Component {
           <h3 className="notes__heading">Notes</h3>
         </header>
 
-        <textarea onChange={this.editNotes} value={this.props.value} />
+        <textarea
+          className="notes__field"
+          maxLength="500"
+          onChange={this.editNotes}
+          value={this.props.value}
+        />
 
-        <footer className="clearfix">
-          <span className="pull-left">
-            {500 - this.props.value.length} characters left
-          </span>
+        <footer className="notes__info">
+          {500 - this.props.value.length} characters left
 
-          <button className="pull-right" onClick={() => this.props.onNotesEdit('')}>
+          <button className="notes__clear" onClick={this.props.onNotesClear}>
             Clear
           </button>
         </footer>

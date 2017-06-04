@@ -133,6 +133,7 @@ class Weather extends Component {
         </ul>
 
         <button className="weather__expander" onClick={this.toggleExpansion}>
+          Today&apos;s forecast
           <FontAwesome
             className="weather__expander-icon"
             name={this.state.expanded ? 'angle-double-up' : 'angle-double-down'}

@@ -1,4 +1,5 @@
 import {
+  CLEARED_NOTES,
   EDITED_NOTES,
 } from 'flashiro/actions/notes';
 
@@ -8,6 +9,11 @@ const initialState = {
 
 function tasks(state = initialState, action) {
   switch (action.type) {
+    case CLEARED_NOTES:
+      return {
+        ...state,
+        value: '',
+      };
     case EDITED_NOTES:
       return {
         ...state,
