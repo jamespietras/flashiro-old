@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
-import { clearNotes, editNotes } from 'flashiro/actions/notes';
+import { clearNotes, saveNotes } from 'flashiro/actions/notes';
 import { completeTask, createTask, toggleTaskPriority } from 'flashiro/actions/tasks';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
@@ -35,11 +35,11 @@ const propTypes = {
   })).isRequired,
   createTask: PropTypes.func.isRequired,
   completeTask: PropTypes.func.isRequired,
-  editNotes: PropTypes.func.isRequired,
   loadCnnHeadlines: PropTypes.func.isRequired,
   loadWeatherForecast: PropTypes.func.isRequired,
   loadingCnnHeadlines: PropTypes.bool.isRequired,
   notes: PropTypes.string.isRequired,
+  saveNotes: PropTypes.func.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -79,7 +79,7 @@ class Dashboard extends Component {
             <div className="dashboard__tile">
               <Notes
                 onNotesClear={this.props.clearNotes}
-                onNotesEdit={this.props.editNotes}
+                onNotesSave={this.props.saveNotes}
                 value={this.props.notes}
               />
             </div>
@@ -134,9 +134,9 @@ const actions = {
   clearNotes,
   completeTask,
   createTask,
-  editNotes,
   loadCnnHeadlines,
   loadWeatherForecast,
+  saveNotes,
   toggleTaskPriority,
 };
 

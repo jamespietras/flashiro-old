@@ -1,3 +1,4 @@
+import _debounce from 'lodash/debounce';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -6,7 +7,7 @@ import './Notes.scss';
 
 const propTypes = {
   onNotesClear: PropTypes.func.isRequired,
-  onNotesEdit: PropTypes.func.isRequired,
+  onNotesSave: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
 
@@ -14,13 +15,23 @@ class Notes extends Component {
   constructor(props) {
     super(props);
 
+    this.debouncedOnNotesSave = _debounce(this.props.onNotesSave, 500);
+
+    this.state = {
+      currentValue: props.value,
+    };
+
     this.editNotes = this.editNotes.bind(this);
   }
 
   editNotes(event) {
     event.preventDefault();
 
-    this.props.onNotesEdit(event.target.value);
+    const fieldValue = event.target.value;
+
+    this.setState({
+      currentValue: fieldValue,
+    }, () => this.debouncedOnNotesSave(fieldValue));
   }
 
   render() {
@@ -35,11 +46,11 @@ class Notes extends Component {
           className="notes__field"
           maxLength="500"
           onChange={this.editNotes}
-          value={this.props.value}
+          value={this.state.currentValue}
         />
 
         <footer className="notes__info">
-          {500 - this.props.value.length} characters left
+          {500 - this.state.currentValue.length} characters left
 
           <button className="notes__clear" onClick={this.props.onNotesClear}>
             Clear

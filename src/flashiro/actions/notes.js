@@ -1,5 +1,5 @@
 export const CLEARED_NOTES = 'notes:cleared';
-export const EDITED_NOTES = 'notes:edited';
+export const SAVED_NOTES = 'notes:saved';
 
 export function clearNotes() {
   return (dispatch) => {
@@ -9,10 +9,10 @@ export function clearNotes() {
   };
 }
 
-export function editNotes(newValue) {
+export function saveNotes(newValue) {
   return (dispatch) => {
     dispatch({
-      type: EDITED_NOTES,
+      type: SAVED_NOTES,
       payload: newValue,
     });
   };

@@ -1,6 +1,6 @@
 import {
   CLEARED_NOTES,
-  EDITED_NOTES,
+  SAVED_NOTES,
 } from 'flashiro/actions/notes';
 
 const initialState = {
@@ -14,7 +14,7 @@ function tasks(state = initialState, action) {
         ...state,
         value: '',
       };
-    case EDITED_NOTES:
+    case SAVED_NOTES:
       return {
         ...state,
         value: action.payload,
