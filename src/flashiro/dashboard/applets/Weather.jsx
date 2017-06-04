@@ -52,7 +52,7 @@ class Weather extends Component {
     super(props);
 
     this.state = {
-      expanded: true,
+      expanded: false,
     };
 
     this.toggleExpansion = this.toggleExpansion.bind(this);

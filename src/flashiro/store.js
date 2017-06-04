@@ -28,6 +28,7 @@ const store = createStore(
 );
 
 store.subscribe(() => {
+  localStorage.setItem('notes', JSON.stringify(store.getState().notes.value));
   localStorage.setItem('tasks', JSON.stringify(store.getState().tasks.list));
 });
 

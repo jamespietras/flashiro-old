@@ -1,0 +1,18 @@
+@import '~styles/colors';
+
+.notes {
+  &__header {
+    align-items: center;
+    display: flex;
+  }
+
+  &__heading {
+    margin: 0;
+  }
+
+  &__icon {
+    color: map-get($colors, 'blue');
+    font-size: 42px;
+    margin-right: 12px;
+  }
+}
