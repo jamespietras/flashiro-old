@@ -2,15 +2,15 @@ import axios from 'axios';
 
 const newsapi = axios.create({
   baseURL: 'https://newsapi.org/v1',
-  timeout: 5000,
+  timeout: 10000,
   params: {
     apiKey: 'e47b8acde9a7445a9235d1e4822b9e85',
   },
 });
 
 const openweathermap = axios.create({
-  baseURL: 'http://api.openweathermap.org/data/2.5',
-  timeout: 5000,
+  baseURL: 'https://crossorigin.me/http://api.openweathermap.org/data/2.5',
+  timeout: 10000,
   params: {
     appid: '2bb1f33fae9a0b079aa08055ec6675bd',
   },
