@@ -5,10 +5,12 @@ import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { loadCnnHeadlines } from 'flashiro/actions/headlines';
+import { clearNotes, saveNotes } from 'flashiro/actions/notes';
 import { completeTask, createTask, toggleTaskPriority } from 'flashiro/actions/tasks';
 import { loadWeatherForecast } from 'flashiro/actions/weather';
 import Clock from './applets/Clock';
 import News from './applets/News';
+import Notes from './applets/Notes';
 import Tasks from './applets/Tasks';
 import Weather from './applets/Weather';
 
@@ -22,6 +24,7 @@ const defaultProps = {
 };
 
 const propTypes = {
+  clearNotes: PropTypes.func.isRequired,
   cnnHeadlines: PropTypes.arrayOf(PropTypes.shape({
     author: PropTypes.string,
     description: PropTypes.string.isRequired,
@@ -35,6 +38,8 @@ const propTypes = {
   loadCnnHeadlines: PropTypes.func.isRequired,
   loadWeatherForecast: PropTypes.func.isRequired,
   loadingCnnHeadlines: PropTypes.bool.isRequired,
+  notes: PropTypes.string.isRequired,
+  saveNotes: PropTypes.func.isRequired,
   tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -68,6 +73,14 @@ class Dashboard extends Component {
                 error={this.props.weatherError}
                 forecast={this.props.weatherForecast}
                 loading={this.props.weatherLoading}
+              />
+            </div>
+
+            <div className="dashboard__tile">
+              <Notes
+                onNotesClear={this.props.clearNotes}
+                onNotesSave={this.props.saveNotes}
+                value={this.props.notes}
               />
             </div>
           </Col>
@@ -108,6 +121,7 @@ function mapStateToProps(state) {
   return {
     cnnHeadlines: state.headlines.cnn,
     loadingCnnHeadlines: state.headlines.loadingCnn,
+    notes: state.notes.value,
     tasks: state.tasks.list,
     weatherCity: state.weather.city,
     weatherError: state.weather.forecastError,
@@ -117,10 +131,12 @@ function mapStateToProps(state) {
 }
 
 const actions = {
+  clearNotes,
   completeTask,
   createTask,
   loadCnnHeadlines,
   loadWeatherForecast,
+  saveNotes,
   toggleTaskPriority,
 };
 

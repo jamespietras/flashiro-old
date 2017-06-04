@@ -22,7 +22,7 @@
 
   &__create-field,
   &__create-field:focus {
-    border: none;
+    border: 1px solid map-get($colors, 'grey');
     box-shadow: none;
     outline: none;
   }
