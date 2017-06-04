@@ -34,6 +34,10 @@ class Tasks extends Component {
   createTask(event) {
     event.preventDefault();
 
+    if (!this.state.createFieldValue) {
+      return;
+    }
+
     this.setState({
       createFieldValue: '',
     });
