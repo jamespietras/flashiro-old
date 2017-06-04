@@ -9,7 +9,7 @@ const newsapi = axios.create({
 });
 
 const openweathermap = axios.create({
-  baseURL: 'https://crossorigin.me/http://api.openweathermap.org/data/2.5',
+  baseURL: 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5',
   timeout: 10000,
   params: {
     appid: '2bb1f33fae9a0b079aa08055ec6675bd',
