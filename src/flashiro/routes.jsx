@@ -1,6 +1,6 @@
 import createHistory from 'history/createBrowserHistory';
 import React from 'react';
-import { Route, Router } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import App from 'flashiro/app';
@@ -10,11 +10,12 @@ function routes(store) {
   const history = syncHistoryWithStore(createHistory(), store);
 
   return (
-    <Router history={history}>
+    <BrowserRouter history={history}>
       <App>
         <Route exact path="/" component={Dashboard} />
+        <Route exact path="/test" component={() => <h1 className="text-center">Test route</h1>} />
       </App>
-    </Router>
+    </BrowserRouter>
   );
 }
 
