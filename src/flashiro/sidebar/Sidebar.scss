@@ -1,16 +1,36 @@
 @import '~styles/colors';
 
 .sidebar {
-  background-color: map-get($colors, 'white');
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
   height: 100vh;
   left: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
   position: fixed;
   top: 0;
-  width: 300px;
+  transform: translate3d(-300px, 0, 0);
+  transition: transform .5s;
   z-index: 1;
+
+  &--open {
+    transform: translate3d(0, 0, 0);
+
+    .sidebar__handle {
+      background-color: map-get($colors, 'white');
+      transform: rotateZ(180deg);
+    }
+
+    .sidebar__handle-icon {
+      color: map-get($colors, 'blue');
+    }
+  }
+
+  &__content {
+    background-color: map-get($colors, 'white');
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+      0 3px 14px 2px rgba(0, 0, 0, 0.12),
+      0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    height: 100%;
+    overflow: auto;
+    width: 300px;
+  }
 
   &__entry {
     cursor: pointer;
@@ -55,12 +75,40 @@
     }
   }
 
+  &__handle {
+    background-color: transparent;
+    border: 2px solid map-get($colors, 'grey');
+    border-radius: 50%;
+    height: 46px;
+    left: 320px;
+    outline: none;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    transition: background-color .5s, transform .5s;
+    width: 46px;
+
+    &:hover {
+      background-color: map-get($colors, 'white');
+
+      .sidebar__handle-icon {
+        color: map-get($colors, 'blue');
+      }
+    }
+  }
+
+  &__handle-icon {
+    color: map-get($colors, 'white');
+    font-size: 26px;
+    transition: color .5s;
+  }
+
   &__user-avatar {
     background-color: map-get($colors, 'white');
     background-image: url('avatar.png');
     background-position: center;
     background-size: cover;
-    border: 5px solid map-get($colors, 'blue');
+    border: 2px solid map-get($colors, 'blue');
     border-radius: 50%;
     height: 150px;
     margin: 0 auto;
