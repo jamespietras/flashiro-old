@@ -28,7 +28,7 @@
       0 5px 5px -3px rgba(0, 0, 0, 0.3);
     height: 100%;
     overflow: auto;
-    width: 270px;
+    width: 260px;
   }
 
   &__drawer {
@@ -36,7 +36,7 @@
     left: 0;
     position: fixed;
     top: 0;
-    transform: translate3d(-270px, 0, 0);
+    transform: translate3d(-260px, 0, 0);
     transition: transform .5s;
     z-index: 2;
 
@@ -102,7 +102,7 @@
     border: 2px solid map-get($colors, 'grey');
     border-radius: 50%;
     height: 40px;
-    left: 280px;
+    left: 270px;
     outline: none;
     padding: 0;
     position: absolute;

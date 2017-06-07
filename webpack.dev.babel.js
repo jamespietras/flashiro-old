@@ -69,7 +69,7 @@ const config = {
           'sass-loader',
         ],
       }, {
-        test: /\.(eot|svg|ttf|woff|woff2|jpg|png|gif)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|jpg|png|gif|ico)$/,
         loader: 'file-loader',
       },
     ],
@@ -92,6 +92,7 @@ const config = {
     new PluginHtml({
       filename: path.join(__dirname, 'build/index.html'),
       template: path.join(__dirname, 'public/index.html'),
+      favicon: path.join(__dirname, 'public/favicon.ico'),
     }),
     new PluginProgressBar({
       clear: false,
