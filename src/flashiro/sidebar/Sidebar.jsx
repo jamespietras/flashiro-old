@@ -30,38 +30,47 @@ class Sidebar extends Component {
 
   render() {
     return (
-      <div
-        className={cx({
-          sidebar: true,
-          'sidebar--open': this.state.open,
-        })}
-      >
-        <button className="sidebar__handle" onClick={this.toggleVisibility}>
-          <FontAwesome className="sidebar__handle-icon" name="arrow-right" />
-        </button>
+      <div className="sidebar">
+        <div
+          className={cx({
+            sidebar__backdrop: true,
+            'sidebar__backdrop--visible': this.state.open,
+          })}
+        />
 
-        <div className="sidebar__content">
-          <div className="sidebar__user-info">
-            <div className="sidebar__user-avatar" />
-            <p className="sidebar__user-name">James Pietras</p>
+        <div
+          className={cx({
+            sidebar__drawer: true,
+            'sidebar__drawer--open': this.state.open,
+          })}
+        >
+          <button className="sidebar__handle" onClick={this.toggleVisibility}>
+            <FontAwesome className="sidebar__handle-icon" name="arrow-right" />
+          </button>
+
+          <div className="sidebar__content">
+            <div className="sidebar__user-info">
+              <div className="sidebar__user-avatar" />
+              <p className="sidebar__user-name">James Pietras</p>
+            </div>
+
+            <nav>
+              <ul className="list-unstyled">
+                {_map(menuEntries, (entry, index) => (
+                  <li key={index} className="sidebar__entry">
+                    <Link
+                      className="sidebar__entry-link"
+                      to={entry.link}
+                      onClick={this.toggleVisibility}
+                    >
+                      <FontAwesome className="sidebar__entry-icon" name={entry.icon} />
+                      {entry.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
-
-          <nav>
-            <ul className="list-unstyled">
-              {_map(menuEntries, (entry, index) => (
-                <li key={index} className="sidebar__entry">
-                  <Link
-                    className="sidebar__entry-link"
-                    to={entry.link}
-                    onClick={this.toggleVisibility}
-                  >
-                    <FontAwesome className="sidebar__entry-icon" name={entry.icon} />
-                    {entry.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </div>
     );
