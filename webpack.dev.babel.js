@@ -24,7 +24,7 @@ console.log(`Analyzer available on ${chalk.green.bold(analyzerInfo)}\n`);
 
 const config = {
   target: 'web',
-  devtool: 'sourcemaps',
+  devtool: 'source-map',
   entry: [
     `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
     'webpack/hot/dev-server',
@@ -64,9 +64,12 @@ const config = {
           'style-loader',
           {
             loader: 'css-loader',
-            query: { root: '.' },
+            options: { sourceMap: true },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: { includePaths: ['src'], sourceMap: true },
+          },
         ],
       }, {
         test: /\.(eot|svg|ttf|woff|woff2|jpg|png|gif|ico)$/,
@@ -112,7 +115,7 @@ const server = new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname, 'build'),
   hot: true,
   watchContentBase: true,
-  historyApiFallback: false,
+  historyApiFallback: true,
   compress: true,
   clientLogLevel: 'info',
   filename: 'bundle.js',

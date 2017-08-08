@@ -1,4 +1,4 @@
-@import '~styles/colors';
+@import 'styles/colors';
 
 .tasks {
   &__create {
@@ -16,19 +16,19 @@
     width: 34px;
 
     &:hover {
-      background-color: rgba(map-get($colors, 'black'), .1);
+      background-color: rgba($color-black, .1);
     }
   }
 
   &__create-field,
   &__create-field:focus {
-    border: 1px solid map-get($colors, 'grey');
+    border: 1px solid $color-grey;
     box-shadow: none;
     outline: none;
   }
 
   &__create-icon {
-    color: map-get($colors, 'blue');
+    color: $color-blue;
     font-size: 24px;
   }
 
@@ -39,7 +39,7 @@
   }
 
   &__header-icon {
-    color: map-get($colors, 'blue');
+    color: $color-blue;
     font-size: 42px;
     margin-right: 12px;
   }
@@ -55,8 +55,8 @@
 
   &__list-completion-action {
     align-items: center;
-    background-color: map-get($colors, 'blue');
-    color: map-get($colors, 'white');
+    background-color: $color-blue;
+    color: $color-white;
     display: flex;
     flex: 0 0 0;
     font-size: 18px;
@@ -103,11 +103,11 @@
     }
 
     &:nth-of-type(2n - 1) {
-      background-color: map-get($colors, 'cloudy');
+      background-color: $color-cloudy;
     }
 
     &:nth-of-type(2n) {
-      background-color: map-get($colors, 'grey');
+      background-color: $color-grey;
     }
   }
 
@@ -147,7 +147,7 @@
     transition: background-color .5s;
 
     &:hover {
-      background-color: rgba(map-get($colors, 'red'), .2);
+      background-color: rgba($color-red, .2);
 
       .tasks__priority-icon {
         opacity: 1;
@@ -156,13 +156,13 @@
   }
 
   &__priority-icon {
-    color: rgba(map-get($colors, 'black'), .5);
+    color: rgba($color-black, .5);
     font-size: 21px;
     opacity: 0;
     transition: color .5s, opacity .5s;
 
     &--active {
-      color: map-get($colors, 'red');
+      color: $color-red;
       opacity: 1;
     }
   }

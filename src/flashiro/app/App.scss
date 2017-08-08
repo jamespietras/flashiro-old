@@ -12,9 +12,13 @@ html {
 }
 
 .app {
-  background-attachment: fixed;
-  background-image: url('/background.png');
-  background-position: center;
+  background: url('background.png') fixed center;
   background-size: cover;
+  display: flex;
   min-height: 100vh;
+  overflow-x: hidden;
+
+  &__content {
+    flex: 1 1 0;
+  }
 }

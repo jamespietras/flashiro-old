@@ -1,4 +1,4 @@
-@import '~styles/colors';
+@import 'styles/colors';
 
 .error-message {
   align-items: center;
@@ -7,7 +7,7 @@
   text-align: center;
 
   &__icon {
-    color: map-get($colors, 'red');
+    color: $color-red;
     font-size: 32px;
   }
 

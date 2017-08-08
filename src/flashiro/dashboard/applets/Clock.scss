@@ -1,4 +1,4 @@
-@import '~styles/colors';
+@import 'styles/colors';
 
 .clock {
   align-items: center;
@@ -9,7 +9,7 @@
   }
 
   &__icon {
-    color: map-get($colors, 'blue');
+    color: $color-blue;
     font-size: 46px;
   }
 

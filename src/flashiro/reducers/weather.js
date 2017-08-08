@@ -17,16 +17,14 @@ const initialState = {
 };
 
 function parseForecast(forecastList) {
-  let forecast = _take(forecastList, 7);
+  const forecast = _take(forecastList, 7);
 
-  forecast = _map(forecast, entry => ({
+  return _map(forecast, entry => ({
     description: _first(entry.weather).description,
     icon: _first(entry.weather).main.toLowerCase(),
     temperature: Math.round(entry.main.temp - 273.15),
     time: moment(entry.dt_txt),
   }));
-
-  return forecast;
 }
 
 function headlines(state = initialState, action) {

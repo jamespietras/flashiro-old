@@ -45,9 +45,12 @@ const config = {
           use: [
             {
               loader: 'css-loader',
-              query: { minimize: true, root: '.' },
+              query: { minimize: true },
             },
-            'sass-loader',
+            {
+              loader: 'sass-loader',
+              options: { includePaths: ['src'] },
+            },
           ],
         }),
       }, {

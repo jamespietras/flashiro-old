@@ -102,10 +102,7 @@ class Dashboard extends Component {
 
           <Col lg={4}>
             <div className="dashboard__tile">
-              <News
-                headlines={this.props.cnnHeadlines}
-                loading={this.props.loadingCnnHeadlines}
-              />
+              <News headlines={this.props.cnnHeadlines} loading={this.props.loadingCnnHeadlines} />
             </div>
           </Col>
         </Row>

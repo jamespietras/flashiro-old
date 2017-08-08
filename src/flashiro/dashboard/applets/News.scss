@@ -1,4 +1,4 @@
-@import '~styles/colors';
+@import 'styles/colors';
 
 .news {
   &__content {
@@ -10,7 +10,7 @@
     padding: 10px 12px 0;
 
     &:not(:last-of-type) {
-      border-bottom: 2px solid map-get($colors, 'grey');
+      border-bottom: 2px solid $color-grey;
     }
   }
 
@@ -20,7 +20,7 @@
   }
 
   &__entry-heading {
-    color: map-get($colors, 'blue-dark');
+    color: $color-blue-dark;
     font-size: 16px;
     margin: 0;
   }
@@ -37,7 +37,7 @@
   }
 
   &__icon {
-    color: map-get($colors, 'blue');
+    color: $color-blue;
     font-size: 64px;
     margin-right: 10px;
   }
@@ -66,12 +66,12 @@
 
     &--active {
       &::after {
-        background-color: map-get($colors, 'blue');
+        background-color: $color-blue;
       }
     }
 
     &::after {
-      border: 2px solid map-get($colors, 'blue');
+      border: 2px solid $color-blue;
       border-radius: 50%;
       content: '';
       display: block;
@@ -82,7 +82,7 @@
 
     &:hover {
       &::after {
-        background-color: map-get($colors, 'blue');
+        background-color: $color-blue;
       }
     }
   }
