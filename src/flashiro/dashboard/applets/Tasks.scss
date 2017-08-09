@@ -82,10 +82,10 @@
       }
     }
 
-    &.manipulation-leave {
+    &.manipulation-exit {
       height: 36px;
 
-      &.manipulation-leave-active {
+      &.manipulation-exit-active {
         height: 0;
         transition: background-color .5s, height .5s;
       }

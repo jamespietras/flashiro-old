@@ -3,7 +3,7 @@ import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { FormControl } from 'react-bootstrap';
 
 import OverflowTooltip from 'flashiro/utilities/OverflowTooltip';
@@ -60,43 +60,41 @@ class Tasks extends Component {
         </header>
 
         <ul className="list-unstyled tasks__list">
-          <CSSTransitionGroup
-            transitionName="manipulation"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-          >
+          <TransitionGroup>
             {_map(this.props.list, entry => (
-              <li key={entry.id} className="tasks__list-entry">
-                <button
-                  className="tasks__list-entry-content"
-                  onClick={() => this.props.onTaskCompletion(entry.id)}
-                >
-                  <div className="tasks__list-completion-action">
-                    <FontAwesome name="check" />
-                  </div>
+              <CSSTransition key={entry.id} classNames="manipulation" timeout={500}>
+                <li className="tasks__list-entry">
+                  <button
+                    className="tasks__list-entry-content"
+                    onClick={() => this.props.onTaskCompletion(entry.id)}
+                  >
+                    <div className="tasks__list-completion-action">
+                      <FontAwesome name="check" />
+                    </div>
 
-                  <OverflowTooltip content={entry.title}>
-                    <span className="tasks__list-entry-title">
-                      {entry.title}
-                    </span>
-                  </OverflowTooltip>
-                </button>
+                    <OverflowTooltip content={entry.title}>
+                      <span className="tasks__list-entry-title">
+                        {entry.title}
+                      </span>
+                    </OverflowTooltip>
+                  </button>
 
-                <button
-                  className="tasks__priority"
-                  onClick={() => this.props.onTaskPriorityToggle(entry.id)}
-                >
-                  <FontAwesome
-                    className={cx({
-                      'tasks__priority-icon': true,
-                      'tasks__priority-icon--active': entry.priority,
-                    })}
-                    name="exclamation"
-                  />
-                </button>
-              </li>
+                  <button
+                    className="tasks__priority"
+                    onClick={() => this.props.onTaskPriorityToggle(entry.id)}
+                  >
+                    <FontAwesome
+                      className={cx({
+                        'tasks__priority-icon': true,
+                        'tasks__priority-icon--active': entry.priority,
+                      })}
+                      name="exclamation"
+                    />
+                  </button>
+                </li>
+              </CSSTransition>
             ))}
-          </CSSTransitionGroup>
+          </TransitionGroup>
         </ul>
 
         <form className="tasks__create" onSubmit={this.createTask}>
