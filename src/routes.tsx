@@ -1,12 +1,14 @@
+import * as React from 'react';
 import createHistory from 'history/createBrowserHistory';
-import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { Store } from 'redux';
 
-import App from 'flashiro/app';
+import App from '@flashiro/app';
 import Dashboard from 'flashiro/dashboard';
+import { IRootState } from '@flashiro/reducers';
 
-function routes(store) {
+function routes(store: Store<IRootState>) {
   const history = syncHistoryWithStore(createHistory(), store);
 
   return (

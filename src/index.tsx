@@ -1,11 +1,11 @@
 import 'styles/index.scss';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import routes from 'flashiro/routes';
-import store from 'flashiro/store';
+import routes from '@flashiro/routes';
+import store from '@flashiro/store';
 
 ReactDOM.render(
   <Provider store={store}>

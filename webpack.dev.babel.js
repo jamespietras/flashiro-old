@@ -26,9 +26,10 @@ const config = {
   target: 'web',
   devtool: 'source-map',
   entry: [
-    `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
-    'webpack/hot/dev-server',
-    './src/index.jsx',
+    // 'react-hot-loader/patch',
+    // `webpack-dev-server/client?http://${serverHost}:${serverPort}`,
+    // 'webpack/hot/dev-server',
+    './src/index.tsx',
   ],
   output: {
     path: path.join(__dirname, 'build'),
@@ -36,7 +37,7 @@ const config = {
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.ts', '.tsx'],
     modules: [
       path.join(__dirname, 'src'),
       path.join(__dirname, 'node_modules'),
@@ -45,19 +46,18 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        test: /\.(ts|tsx)$/,
         loaders: [
-          'react-hot-loader',
+          // 'react-hot-loader/webpack',
           {
-            loader: 'babel-loader',
-            options: {
-              plugins: ['lodash'],
-              presets: ['es2015', 'react', 'stage-1'],
-            },
+            loader: 'ts-loader',
+            options: { logLevel: 'warn', sourceMap: true },
           },
         ],
         include: __dirname,
+      // }, {
+      //   test: /\.js$/,
+      //   loader: 'script-loader',
       }, {
         test: /\.scss$/,
         loaders: [

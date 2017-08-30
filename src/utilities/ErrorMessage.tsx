@@ -1,20 +1,17 @@
-import FontAwesome from 'react-fontawesome';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as FontAwesome from 'react-fontawesome';
+import * as React from 'react';
 
 import './ErrorMessage.scss';
 
-const propTypes = {
-  message: PropTypes.string.isRequired,
-};
+interface IErrorMessageProps {
+  message: string,
+}
 
-const ErrorMessage = props => (
+const ErrorMessage = (props: IErrorMessageProps) => (
   <div className="error-message">
     <FontAwesome className="error-message__icon" name="warning" />
     <span className="error-message__text">{props.message}</span>
   </div>
 );
-
-ErrorMessage.propTypes = propTypes;
 
 export default ErrorMessage;

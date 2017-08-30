@@ -26,7 +26,7 @@ class Api {
     });
   }
 
-  static queryWeather(latitude, longitude) {
+  static queryWeather(latitude: number, longitude: number) {
     return openweathermap.get('/forecast', {
       params: {
         lat: latitude,

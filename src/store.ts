@@ -1,17 +1,15 @@
 import thunkMiddleware from 'redux-thunk';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, Middleware, Store } from 'redux';
+import { ReduxLoggerOptions } from 'redux-logger';
 
-import rootReducer from 'flashiro/reducers';
+import { IRootState, rootReducer } from 'flashiro/reducers';
 
-const middleware = [
+const middleware: Middleware[] = [
   thunkMiddleware,
 ];
 
-// logger must always be the last middleware
 if (process.env.NODE_ENV === 'development') {
-  /* eslint-disable global-require */
-  const { createLogger } = require('redux-logger');
-  /* eslint-enable global-require */
+  const createLogger: (options?: ReduxLoggerOptions) => Middleware = require('redux-logger').createLogger;
 
   const loggerMiddleware = createLogger({
     collapsed: true,
@@ -22,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
   middleware.push(loggerMiddleware);
 }
 
-const store = createStore(
+const store: Store<IRootState> = createStore(
   rootReducer,
   applyMiddleware(...middleware),
 );

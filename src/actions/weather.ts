@@ -1,4 +1,5 @@
-import _pick from 'lodash/pick';
+import { Action, Dispatch } from 'redux';
+import { pick } from 'lodash';
 
 import Api from 'flashiro/api';
 import Navigator from 'flashiro/tools/navigator';
@@ -8,7 +9,7 @@ export const LOADED_WEATHER_FORECAST = 'weather:loadedWeatherForecast';
 export const LOADING_WEATHER_FORECAST = 'weather:loadingWeatherForecast';
 
 export function loadWeatherForecast() {
-  return (dispatch) => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({ type: LOADING_WEATHER_FORECAST });
 
     if (!Navigator.isAvailable()) {
@@ -27,7 +28,7 @@ export function loadWeatherForecast() {
     }).then(response => (
       dispatch({
         type: LOADED_WEATHER_FORECAST,
-        payload: _pick(response.data, ['city', 'list']),
+        payload: pick(response.data, ['city', 'list']),
       })
     )).catch(error => (
       dispatch({
